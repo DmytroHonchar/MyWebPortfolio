@@ -1,4 +1,3 @@
-/* Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +5,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: Poppins, sans-serif;
   background: #000;
   color: #fff;
   line-height: 1.6;
@@ -19,18 +18,22 @@ body {
   padding: 20px;
 }
 
-/* NAV BAR PANEL */
 .icon-navbar {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: transparent;
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
-  background-color: #222;
   border-radius: 20px;
   margin: 10px auto;
   padding: 8px 18px;
   width: fit-content;
 }
 
-/* NAV ITEM */
 .nav-item {
   position: relative;
   display: flex;
@@ -41,16 +44,15 @@ body {
   border-radius: 8px;
 }
 
-/* ICON */
 .nav-item img {
   width: 24px;
   height: 24px;
   display: block;
 }
 
-/* TOOLTIP LABEL */
 .nav-label {
   position: absolute;
+  z-index: 1010;
   top: 150%;
   left: 50%;
   transform: translate(-50%, -20px);
@@ -70,46 +72,56 @@ body {
   opacity: 1;
 }
 
-
-/* Hero Section */
 .hero {
+  position: relative;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh; 
   text-align: center;
   padding: 0 20px;
-  background: #000; /* Ensures black background */
+  background: url('/public/images/bg1.jpg') no-repeat center center/cover;
   font-family: Poppins;
 }
 
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
 .hero-content {
+  position: relative;
+  z-index: 2;
   max-width: 800px;
   margin: 0 auto;
 }
 
-/* Outlined text styling */
 .outline-text1 {
   font-size: 4.3rem;
-  font-weight: 900; 
+  font-weight: 900;
   line-height: 1.2;
-  color: transparent;             
-  -webkit-text-stroke: 0.5px #fff;  
+  color: transparent;
+  -webkit-text-stroke: 0.5px #fff;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
 }
 
 .outline-text2 {
   font-size: 4.3rem;
-  font-weight: 900; 
+  font-weight: 900;
   line-height: 1.2;
-  color: #fff;                    
-  -webkit-text-stroke: none;       
-  -webkit-text-fill-color: #fff;  
+  color: #fff;
+  -webkit-text-stroke: none;
+  -webkit-text-fill-color: #fff;
   text-transform: uppercase;
 }
 
-/* Subheading */
 .subheading {
   margin-bottom: 20px;
   font-size: 1.1rem;
@@ -118,7 +130,6 @@ body {
   font-weight: 300;
 }
 
-/* Hero Section Buttons */
 .hero-buttons {
   margin-top: 30px;
 }
@@ -141,7 +152,6 @@ body {
   transform: scale(1.05);
 }
 
-/* Secondary Button Style */
 .hero-buttons .btn-secondary {
   background: transparent;
   border: 2px solid #fff;
@@ -153,8 +163,6 @@ body {
   color: #000;
 }
 
-
-/* About, Services, Portfolio, Testimonials, Contact, Footer Sections */
 section {
   padding: 60px 0;
   background: #111;
@@ -177,7 +185,6 @@ section p {
   margin: 0 auto;
 }
 
-/* Services Grid */
 .services-grid {
   display: flex;
   flex-wrap: wrap;
@@ -204,7 +211,6 @@ section p {
   font-size: 1.5em;
 }
 
-/* Portfolio Grid */
 .portfolio-grid {
   display: flex;
   flex-wrap: wrap;
@@ -232,7 +238,6 @@ section p {
   margin-bottom: 15px;
 }
 
-/* Testimonials Grid */
 .testimonials-grid {
   display: flex;
   flex-wrap: wrap;
@@ -249,7 +254,6 @@ section p {
   text-align: center;
 }
 
-/* Contact Form */
 #contactForm {
   max-width: 600px;
   margin: 0 auto;
@@ -281,14 +285,12 @@ section p {
   background: #ddd;
 }
 
-/* Footer */
 footer {
   background: #111;
   text-align: center;
   padding: 20px 0;
 }
 
-/* Responsive Styles */
 @media (max-width: 768px) {
   .icon-navbar {
     flex-direction: column;
@@ -302,7 +304,6 @@ footer {
     flex-direction: column;
   }
 }
-
 
 @font-face {
   font-family: 'Poppins';
