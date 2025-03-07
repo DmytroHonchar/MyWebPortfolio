@@ -1,3 +1,4 @@
+/* Global Resets */
 * {
   margin: 0;
   padding: 0;
@@ -11,6 +12,7 @@ body {
   line-height: 1.6;
 }
 
+/* Container */
 .container {
   width: 90%;
   max-width: 1200px;
@@ -18,6 +20,7 @@ body {
   padding: 20px;
 }
 
+/* Navbar */
 .icon-navbar {
   position: absolute;
   top: 20px;
@@ -56,7 +59,6 @@ body {
   top: 150%;
   left: 50%;
   transform: translate(-50%, -20px);
-  background-color: #444;
   color: #fff;
   padding: 1px 6px;
   border-radius: 4px;
@@ -64,14 +66,17 @@ body {
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease, text-shadow 0.3s ease;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0);
 }
 
 .nav-item:hover .nav-label {
   transform: translate(-50%, 0);
   opacity: 1;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
 }
 
+/* Hero Section */
 .hero {
   position: relative;
   height: 100vh;
@@ -81,7 +86,6 @@ body {
   text-align: center;
   padding: 0 20px;
   background: url('/public/images/bg1.jpg') no-repeat center center/cover;
-  font-family: Poppins;
 }
 
 .hero::before {
@@ -163,13 +167,14 @@ body {
   color: #000;
 }
 
+/* Sections */
 section {
   padding: 60px 0;
   background: #111;
 }
 
 section:nth-of-type(even) {
-  background: #222;
+  background: #000;
 }
 
 section h2 {
@@ -185,32 +190,235 @@ section p {
   margin: 0 auto;
 }
 
-.services-grid {
+/* About Section (NEW LAYOUT) */
+.about-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
   justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
-.service-item {
-  background: #111;
-  padding: 30px;
-  border-radius: 8px;
-  flex: 1 1 calc(45% - 60px);
-  max-width: calc(45% - 60px);
+/* Profile Card (Left) */
+.profile-card {
+  width: 300px;
+  height: 550px;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 20px;
   text-align: center;
-  transition: transform 0.3s;
+  position: relative;
+  overflow: hidden;
+  color: #000;
 }
 
-.service-item:hover {
-  transform: translateY(-10px);
+.profile-image {
+  position: relative;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.service-item h3 {
-  margin-bottom: 15px;
-  font-size: 1.5em;
+.profile-image img {
+  width: 100%;
+  height: 300px;
+  display: block;
+  border-radius: 12px;
 }
 
+.arc {
+  position: absolute;
+  border: 2px dashed #ff6a00;
+  border-radius: 50%;
+}
+
+.arc-1 {
+  width: 60px;
+  height: 60px;
+  top: 0;
+  left: -30px;
+}
+
+.arc-2 {
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  right: -30px;
+}
+
+.profile-name {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.flame-icon {
+  font-size: 1.3rem;
+  color: #ff6a00;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.profile-description {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.social-icons a img {
+  width: 24px;  
+  height: 23px; 
+}
+
+/* About Hero Content (Right) */
+.about-hero-content {
+  max-width: 500px;
+}
+
+/* "Software Engineer" Text Styles */
+.hero-title {
+  font-size: 5.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.faded-title {
+  display: block;
+  color: #444;
+  font-weight: 600;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #aaa;
+  max-width: 400px;
+  margin: 0; /* override default section p styling */
+  text-align: left;
+}
+
+/* Services */
+/* -- Services Section Wrapper -- */
+.services-section {
+  background: #111; /* or #000 if you prefer */
+  padding: 60px 0;
+}
+
+/* Optional subtitle above main heading */
+.services-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+/* Main heading with highlight word */
+.services-title {
+  font-size: 2rem;
+  line-height: 1.3;
+  text-align: center;
+  color: #fff;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+}
+
+.services-title .highlight {
+  background-color: #ff6a00; /* your accent color */
+  color: #fff;
+  padding: 0 4px;
+  border-radius: 2px;
+}
+
+/* Grid Layout: 3 columns, 2 rows */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  justify-items: stretch;
+  align-items: start;
+}
+
+/* 
+  Offset the middle column in each row.
+  - nth-child(2) is the 2nd card in the top row
+  - nth-child(5) is the 2nd card in the bottom row
+*/
+.services-grid .service-card:nth-child(2),
+.services-grid .service-card:nth-child(5) {
+  margin-top: 12px; /* adjust as desired */
+}
+
+/* Each service card */
+.service-card {
+  padding: 20px;
+  border-radius: 5px;
+  text-align: left;  /* left-align text */
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Icon in a circle at the top of each card */
+.service-icon {
+  width: 50px;
+  height: 50px;
+  background: #ff6a00; /* can vary by card if you want */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.service-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Heading & paragraph inside card */
+.service-card h2 {
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+  color: inherit;
+  text-align: left;
+}
+
+.service-card p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: inherit;
+  text-align: left;
+}
+
+/* -- Card Color Variations -- */
+.black-card {
+  background-color: #333;
+  color: #fff;
+}
+
+.accent-card {
+  background-color: #ff6a00;
+  color: #fff;
+}
+
+.white-card {
+  background-color: #fff;
+  color: #333;
+}
+
+
+/* Portfolio */
 .portfolio-grid {
   display: flex;
   flex-wrap: wrap;
@@ -238,6 +446,7 @@ section p {
   margin-bottom: 15px;
 }
 
+/* Testimonials */
 .testimonials-grid {
   display: flex;
   flex-wrap: wrap;
@@ -254,6 +463,7 @@ section p {
   text-align: center;
 }
 
+/* Contact Form */
 #contactForm {
   max-width: 600px;
   margin: 0 auto;
@@ -285,12 +495,14 @@ section p {
   background: #ddd;
 }
 
+/* Footer */
 footer {
   background: #111;
   text-align: center;
   padding: 20px 0;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .icon-navbar {
     flex-direction: column;
@@ -303,8 +515,12 @@ footer {
   .portfolio-grid {
     flex-direction: column;
   }
+  .about-container {
+    flex-direction: column;
+  }
 }
 
+/* Font Face Example */
 @font-face {
   font-family: 'Poppins';
   src: url('/public/font-family/Poppins-Medium.ttf') format('opentype');
