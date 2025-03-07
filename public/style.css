@@ -304,14 +304,12 @@ section p {
   text-align: left;
 }
 
-/* Services */
-/* -- Services Section Wrapper -- */
+/* Services Section */
 .services-section {
-  background: #111; /* or #000 if you prefer */
+  background: #111;
   padding: 60px 0;
 }
 
-/* Optional subtitle above main heading */
 .services-subtitle {
   font-size: 1rem;
   font-weight: 600;
@@ -321,59 +319,61 @@ section p {
   opacity: 0.8;
 }
 
-/* Main heading with highlight word */
 .services-title {
   font-size: 2rem;
   line-height: 1.3;
   text-align: center;
   color: #fff;
   max-width: 800px;
-  margin: 0 auto 40px auto;
+  margin: 0 auto 40px;
 }
 
 .services-title .highlight {
-  background-color: #ff6a00; /* your accent color */
+  background-color: #ff6a00;
   color: #fff;
   padding: 0 4px;
   border-radius: 2px;
 }
 
-/* Grid Layout: 3 columns, 2 rows */
+/* Services Grid Layout */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   justify-items: stretch;
   align-items: start;
+  perspective: 1000px;
 }
 
-/* 
-  Offset the middle column in each row.
-  - nth-child(2) is the 2nd card in the top row
-  - nth-child(5) is the 2nd card in the bottom row
-*/
+/* Offset specific cards (optional) */
 .services-grid .service-card:nth-child(2),
 .services-grid .service-card:nth-child(5) {
-  margin-top: 12px; /* adjust as desired */
+  margin-top: 12px;
 }
 
-/* Each service card */
+/* Service Card Base Styles */
 .service-card {
   padding: 20px;
   border-radius: 5px;
-  text-align: left;  /* left-align text */
-  transition: transform 0.3s ease;
+  text-align: left;
+  transform-origin: left center;
+  transition: transform 0.5s ease-in-out;
+  /* AOS applies inline transforms on scroll */
 }
 
-.service-card:hover {
-  transform: translateY(-5px);
+/* Hover & Active state for entire card – using !important to override inline AOS transforms */
+.service-card:hover,
+.service-card:active {
+  transform: rotate(-2.5deg) !important;
 }
 
-/* Icon in a circle at the top of each card */
+
+
+/* Icon Styles */
 .service-icon {
   width: 50px;
   height: 50px;
-  background: #ff6a00; /* can vary by card if you want */
+  background: #ff6a00;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -386,7 +386,7 @@ section p {
   height: 24px;
 }
 
-/* Heading & paragraph inside card */
+/* Typography for service card */
 .service-card h2 {
   margin-bottom: 10px;
   font-size: 1.25rem;
@@ -401,21 +401,38 @@ section p {
   text-align: left;
 }
 
-/* -- Card Color Variations -- */
+/* Color Variations */
 .black-card {
   background-color: #333;
   color: #fff;
+  transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out !important;
 }
+
+.black-card:hover {
+  background-color: #141414 !important;
+}
+
 
 .accent-card {
   background-color: #ff6a00;
   color: #fff;
+  transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out !important;
+}
+
+.accent-card:hover{
+  background-color: #eb5600;
 }
 
 .white-card {
   background-color: #fff;
   color: #333;
+  transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out !important;
 }
+
+.white-card:hover{
+  background-color: #f0f0f0 ;
+}
+
 
 
 /* Portfolio */
