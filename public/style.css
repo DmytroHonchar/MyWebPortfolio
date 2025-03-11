@@ -436,6 +436,37 @@ section p {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* ===== Order Steps Section ===== */
+
+.container_steps{
+  display: flex;
+  flex-direction: column; 
+  max-width: 500px;
+}
+
+.step-line{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.step-line h2{   
+  font-size: 70px;         
+  font-weight: 700;
+  color: #c9c7c7;
+  margin-left: 10px;
+
+}
+
+.step-line{
+  display: flex;
+  flex-direction: row;
+}
+
+/*  */
+
+
+
 .portfolio-grid {
   display: flex;
   flex-wrap: wrap;
