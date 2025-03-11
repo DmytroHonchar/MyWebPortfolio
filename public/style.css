@@ -353,12 +353,15 @@ section p {
 
 /* Service Card Base Styles */
 .service-card {
-  padding: 20px;
+  padding: 15px 20px;  /* Reduced padding for a moderate size */
   border-radius: 5px;
   text-align: left;
-  transform-origin: left center;
-  transition: transform 0.5s ease-in-out;
-  /* AOS applies inline transforms on scroll */
+  transition: transform 0.3s ease-in-out;
+  min-height: 240px;  
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 /* Hover & Active state for entire card – using !important to override inline AOS transforms */
@@ -381,11 +384,36 @@ section p {
   margin-bottom: 10px;
 }
 
+.service-icon2 {
+  width: 50px;
+  height: 50px;
+  background: #333;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.services-grid .service-card:nth-child(4) .service-icon,
+.services-grid .service-card:nth-child(6) .service-icon {
+  background: #333;
+}
+
+.services-grid .service-card:nth-child(5) .service-icon {
+  background: gray; /* or your desired gray shade */
+}
+
+
 .service-icon img {
   width: 24px;
   height: 24px;
 }
 
+.service-icon2 img {
+  width: 24px;
+  height: 24px;
+}
 /* Typography for service card */
 .service-card h2 {
   margin-bottom: 10px;
