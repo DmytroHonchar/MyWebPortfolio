@@ -1,4 +1,3 @@
-/* Global Resets */
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +11,6 @@ body {
   line-height: 1.6;
 }
 
-/* Container */
 .container {
   width: 90%;
   max-width: 1200px;
@@ -20,7 +18,6 @@ body {
   padding: 20px;
 }
 
-/* Navbar */
 .icon-navbar {
   position: absolute;
   top: 20px;
@@ -76,7 +73,6 @@ body {
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
 }
 
-/* Hero Section */
 .hero {
   position: relative;
   height: 100vh;
@@ -167,7 +163,6 @@ body {
   color: #000;
 }
 
-/* Sections */
 section {
   padding: 60px 0;
   background: #111;
@@ -190,7 +185,6 @@ section p {
   margin: 0 auto;
 }
 
-/* About Section (NEW LAYOUT) */
 .about-container {
   display: flex;
   justify-content: center;
@@ -198,7 +192,6 @@ section p {
   flex-wrap: wrap;
 }
 
-/* Profile Card (Left) */
 .profile-card {
   width: 300px;
   height: 550px;
@@ -227,7 +220,7 @@ section p {
 
 .arc {
   position: absolute;
-  border: 2px dashed #ff6a00;
+  border: 2px dashed #1B5E20;
   border-radius: 50%;
 }
 
@@ -252,7 +245,7 @@ section p {
 
 .flame-icon {
   font-size: 1.3rem;
-  color: #ff6a00;
+  color: #1B5E20;
   display: block;
   margin-bottom: 8px;
 }
@@ -271,16 +264,14 @@ section p {
 }
 
 .social-icons a img {
-  width: 24px;  
-  height: 23px; 
+  width: 24px;
+  height: 23px;
 }
 
-/* About Hero Content (Right) */
 .about-hero-content {
   max-width: 500px;
 }
 
-/* "Software Engineer" Text Styles */
 .hero-title {
   font-size: 5.5rem;
   font-weight: 700;
@@ -300,11 +291,11 @@ section p {
   line-height: 1.5;
   color: #aaa;
   max-width: 400px;
-  margin: 0; /* override default section p styling */
+  margin: 0;
   text-align: left;
 }
 
-/* Services Section */
+/* --------------------- Service Section --------------------- */
 .services-section {
   background: #111;
   padding: 60px 0;
@@ -329,13 +320,12 @@ section p {
 }
 
 .services-title .highlight {
-  background-color: #ff6a00;
+  background-color: #6C7B8B; /
   color: #fff;
   padding: 0 4px;
   border-radius: 2px;
 }
 
-/* Services Grid Layout */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -345,38 +335,32 @@ section p {
   perspective: 1000px;
 }
 
-/* Offset specific cards (optional) */
 .services-grid .service-card:nth-child(2),
 .services-grid .service-card:nth-child(5) {
   margin-top: 12px;
 }
 
-/* Service Card Base Styles */
 .service-card {
-  padding: 15px 20px;  /* Reduced padding for a moderate size */
+  padding: 15px 20px;
   border-radius: 5px;
   text-align: left;
   transition: transform 0.3s ease-in-out;
-  min-height: 240px;  
+  min-height: 240px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
-/* Hover & Active state for entire card – using !important to override inline AOS transforms */
 .service-card:hover,
 .service-card:active {
-  transform: rotate(-2.5deg) !important;
+  transform: scale(1.05) !important;
 }
 
-
-
-/* Icon Styles */
 .service-icon {
   width: 50px;
   height: 50px;
-  background: #ff6a00;
+  background: #6C7B8B; 
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -401,9 +385,8 @@ section p {
 }
 
 .services-grid .service-card:nth-child(5) .service-icon {
-  background: gray; /* or your desired gray shade */
+  background: #333;
 }
-
 
 .service-icon img {
   width: 24px;
@@ -414,7 +397,7 @@ section p {
   width: 24px;
   height: 24px;
 }
-/* Typography for service card */
+
 .service-card h2 {
   margin-bottom: 10px;
   font-size: 1.25rem;
@@ -429,26 +412,17 @@ section p {
   text-align: left;
 }
 
-/* Color Variations */
+/* --------------------- End Service Section --------------------- */
+
 .black-card {
-  background-color: #333;
+  background-color: #242320;
   color: #fff;
   transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out !important;
 }
 
 .black-card:hover {
-  background-color: #141414 !important;
-}
-
-
-.accent-card {
-  background-color: #ff6a00;
-  color: #fff;
-  transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out !important;
-}
-
-.accent-card:hover{
-  background-color: #eb5600;
+  background-color: #202020   !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
 }
 
 .white-card {
@@ -457,13 +431,11 @@ section p {
   transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out !important;
 }
 
-.white-card:hover{
-  background-color: #f0f0f0 ;
+.white-card:hover {
+  background-color: #f7f7f7;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-
-
-/* Portfolio */
 .portfolio-grid {
   display: flex;
   flex-wrap: wrap;
@@ -491,7 +463,6 @@ section p {
   margin-bottom: 15px;
 }
 
-/* Testimonials */
 .testimonials-grid {
   display: flex;
   flex-wrap: wrap;
@@ -508,7 +479,6 @@ section p {
   text-align: center;
 }
 
-/* Contact Form */
 #contactForm {
   max-width: 600px;
   margin: 0 auto;
@@ -540,14 +510,12 @@ section p {
   background: #ddd;
 }
 
-/* Footer */
 footer {
   background: #111;
   text-align: center;
   padding: 20px 0;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .icon-navbar {
     flex-direction: column;
@@ -565,7 +533,6 @@ footer {
   }
 }
 
-/* Font Face Example */
 @font-face {
   font-family: 'Poppins';
   src: url('/public/font-family/Poppins-Medium.ttf') format('opentype');
