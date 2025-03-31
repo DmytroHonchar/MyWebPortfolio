@@ -416,6 +416,7 @@ section p {
 .custom-steps-section {
   padding: 40px 0;
   background: #000;
+  position: relative;
 }
 
 .steps-page-wrapper {
@@ -426,6 +427,40 @@ section p {
   padding: 20px;
 }
 
+/* Main vertical line indicator */
+.steps-page-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    transparent 0%,
+    #6C7B8B 20%,
+    #6C7B8B 80%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+
+/* Step dots on the line */
+.step-container::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: #6C7B8B;
+  border-radius: 50%;
+  z-index: 2;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
 .step-container {
   display: flex;
   width: 100%;
@@ -433,11 +468,6 @@ section p {
   position: relative;
   z-index: 2;
   margin: 10px 0;
-  transition: opacity 0.3s ease;
-}
-
-.step-container.active {
-  opacity: 1;
 }
 
 .step-left, .step-right {
@@ -449,66 +479,10 @@ section p {
 
 .step-left img, .step-right img {
   width: 130px;
-  height: 100px;
+  height: 90px;
   object-fit: contain;
-  transition: transform 0.3s ease;
   filter: brightness(0) invert(1);
-}
-
-.step-box {
-  max-width: 450px;
-  padding: 30px;
-  background: #1a1a1a;
-  border-radius: 12px;
-  border: 1px solid #333;
-  position: relative;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  text-align: left;  /* Default text alignment for all step boxes */
-}
-
-.step-box-header {
-  margin-bottom: 20px;
-}
-
-.step-number {
-  width: 40px;
-  height: 40px;
-  background: #6C7B8B;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.step-title {
-  font-size: 1.4rem;
-  color: #fff;
-  margin-bottom: 10px;
-  text-align: inherit;  /* Inherit text alignment from parent */
-}
-
-.step-description {
-  font-size: 1rem;
-  color: #aaa;
-  line-height: 1.6;
-  text-align: inherit;  /* Inherit text alignment from parent */
-}
-
-/* Text alignment for steps */
-.step-container:nth-child(2) .step-box,
-.step-container:nth-child(4) .step-box,
-.step-container:nth-child(6) .step-box {
-  text-align: right;
-}
-
-.step-container:nth-child(2) .step-number,
-.step-container:nth-child(4) .step-number,
-.step-container:nth-child(6) .step-number {
-  margin-left: auto;
-  margin-right: 0;
+  margin: 0 100px;
 }
 
 /* Alternate layouts */
@@ -529,6 +503,50 @@ section p {
 .step-container.reverse .step-right {
   padding-left: 100px;
 }
+
+.step-box {
+  max-width: 450px;
+  padding: 30px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  border: 1px solid #333;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.step-box-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  background: #6C7B8B;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.step-title {
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.step-description {
+  font-size: 1rem;
+  color: #aaa;
+  line-height: 1.6;
+  text-align: left;
+}
+
+
 
 /* Responsive adjustments */
 @media (max-width: 992px) {
@@ -567,6 +585,7 @@ section p {
     font-size: 0.9rem;
   }
 }
+
 
 .portfolio-grid {
   display: flex;

@@ -2,10 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize AOS for animations
   if (typeof AOS !== 'undefined') {
     AOS.init({ 
-      duration: 1000, 
+      duration: 800, 
       once: true,
-      offset: 120,
-      easing: 'ease-out-quad'
+      offset: 100,
+      easing: 'ease-out-cubic',
+      delay: 0
     });
   }
 
