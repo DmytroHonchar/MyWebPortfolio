@@ -414,9 +414,34 @@ section p {
 
 /* Steps Section */
 .custom-steps-section {
-  padding: 40px 0;
+  padding: 20px 0;
   background: #000;
   position: relative;
+}
+
+.steps-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 5px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.steps-title {
+  font-size: 2rem;
+  line-height: 1.3;
+  text-align: center;
+  color: #fff;
+  max-width: 800px;
+  margin: 0 auto 20px;
+}
+
+.steps-title .highlight {
+  background-color: #6C7B8B;
+  color: #fff;
+  padding: 0 4px;
+  border-radius: 2px;
 }
 
 .steps-page-wrapper {
@@ -445,7 +470,16 @@ section p {
   z-index: 1;
 }
 
-/* Step dots on the line */
+.step-container {
+  display: flex;
+  width: 85%;
+  min-height: 250px;
+  position: relative;
+  z-index: 2;
+  margin: 5px auto;
+}
+
+/* Add circle indicator for all steps */
 .step-container::before {
   content: '';
   position: absolute;
@@ -456,18 +490,32 @@ section p {
   height: 12px;
   background: #6C7B8B;
   border-radius: 50%;
-  z-index: 2;
+  z-index: 3;
+  opacity: 0.3;
   transition: all 0.3s ease;
-  opacity: 0.5;
 }
 
-.step-container {
-  display: flex;
-  width: 100%;
-  min-height: 300px;
-  position: relative;
-  z-index: 2;
-  margin: 10px 0;
+.step-container.active::before {
+  opacity: 1;
+  background: #6C7B8B;
+  box-shadow: 0 0 10px rgba(108, 123, 139, 0.5);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% {
+    box-shadow: 0 0 5px rgba(108, 123, 139, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(108, 123, 139, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(108, 123, 139, 0.5);
+  }
+}
+
+.step-container.active ~ .step-container {
+  opacity: 0.5;
 }
 
 .step-left, .step-right {
@@ -488,24 +536,24 @@ section p {
 /* Alternate layouts */
 .step-container:not(.reverse) .step-left {
   justify-content: flex-end;
-  padding-right: 100px;
+  padding-right: 60px;
 }
 
 .step-container:not(.reverse) .step-right {
-  padding-left: 100px;
+  padding-left: 60px;
 }
 
 .step-container.reverse .step-left {
-  padding-right: 100px;
+  padding-right: 60px;
   justify-content: flex-end;
 }
 
 .step-container.reverse .step-right {
-  padding-left: 100px;
+  padding-left: 60px;
 }
 
 .step-box {
-  max-width: 450px;
+  max-width: 400px;
   padding: 30px;
   background: #1a1a1a;
   border-radius: 12px;
@@ -546,14 +594,12 @@ section p {
   text-align: left;
 }
 
-
-
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .step-container {
     flex-direction: column;
     min-height: auto;
-    margin: 20px 0;
+    margin: 10px 0;
   }
   .step-container.reverse {
     flex-direction: column-reverse;
@@ -585,7 +631,6 @@ section p {
     font-size: 0.9rem;
   }
 }
-
 
 .portfolio-grid {
   display: flex;

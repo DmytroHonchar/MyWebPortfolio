@@ -10,6 +10,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Step indicators animation on scroll
+  const stepContainers = document.querySelectorAll('.step-container');
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -20% 0px', // Adjust this to control when steps become active
+    threshold: 0.2
+  };
+
+  const stepObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Remove active class from all steps
+        stepContainers.forEach(step => step.classList.remove('active'));
+        // Add active class to current step
+        entry.target.classList.add('active');
+      }
+    });
+  }, observerOptions);
+
+  // Observe each step container
+  stepContainers.forEach(step => stepObserver.observe(step));
+
   // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function(e) {
