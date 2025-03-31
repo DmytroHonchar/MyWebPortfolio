@@ -81,7 +81,7 @@ body {
   align-items: center;
   text-align: center;
   padding: 0 20px;
-  background: url('/public/images/bg1.jpg') no-repeat center center/cover;
+  background: url('/public/images/bg4.jpg') no-repeat center center/cover;
 }
 
 .hero::before {
@@ -243,13 +243,6 @@ section p {
   margin-bottom: 8px;
 }
 
-.flame-icon {
-  font-size: 1.3rem;
-  color: #1B5E20;
-  display: block;
-  margin-bottom: 8px;
-}
-
 .profile-description {
   font-size: 0.9rem;
   color: #333;
@@ -320,7 +313,7 @@ section p {
 }
 
 .services-title .highlight {
-  background-color: #6C7B8B; /
+  background-color: #6C7B8B;
   color: #fff;
   padding: 0 4px;
   border-radius: 2px;
@@ -361,7 +354,7 @@ section p {
 .service-icon {
   width: 50px;
   height: 50px;
-  background: #6C7B8B; 
+  background: #6C7B8B;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -369,32 +362,12 @@ section p {
   margin-bottom: 10px;
 }
 
-.service-icon2 {
-  width: 50px;
-  height: 50px;
-  background: #333;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.services-grid .service-card:nth-child(4) .service-icon,
-.services-grid .service-card:nth-child(6) .service-icon {
-  background: #333;
-}
-
-.services-grid .service-card:nth-child(5) .service-icon {
+/* Service icons for cards 4, 5, 6 */
+.service-card:nth-child(n+4) .service-icon {
   background: #333;
 }
 
 .service-icon img {
-  width: 24px;
-  height: 24px;
-}
-
-.service-icon2 img {
   width: 24px;
   height: 24px;
 }
@@ -422,9 +395,9 @@ section p {
 }
 
 .black-card:hover {
-  background-color: #202020   !important;
+  background-color: #202020 !important;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
-  transition-delay: 0s !important; 
+  transition-delay: 0s !important;
 }
 
 .white-card {
@@ -436,128 +409,164 @@ section p {
 .white-card:hover {
   background-color: #f7f7f7;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition-delay: 0s !important; 
+  transition-delay: 0s !important;
 }
 
 /* Steps Section */
-
-.steps-section {
-  background: #111;
-  padding: 60px 20px;
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
+.custom-steps-section {
+  padding: 40px 0;
+  background: #000;
 }
 
-.steps-container {
+.steps-page-wrapper {
+  position: relative;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 80px;
-  flex-wrap: wrap;
-}
-
-.box {
-  background: #2c2c2c;
-  border-radius: 5px;
   padding: 20px;
-  width: 280px;
-  height: 250px;
+}
+
+.step-container {
+  display: flex;
+  width: 100%;
+  min-height: 300px;
   position: relative;
+  z-index: 2;
+  margin: 10px 0;
+  transition: opacity 0.3s ease;
+}
+
+.step-container.active {
+  opacity: 1;
+}
+
+.step-left, .step-right {
+  flex: 1;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+.step-left img, .step-right img {
+  width: 130px;
+  height: 100px;
+  object-fit: contain;
   transition: transform 0.3s ease;
+  filter: brightness(0) invert(1);
 }
 
-.box:hover {
-  transform: scale(1.05) !important;
-  transition-delay: 0s !important; 
+.step-box {
+  max-width: 450px;
+  padding: 30px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  border: 1px solid #333;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: left;  /* Default text alignment for all step boxes */
 }
 
-.box-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 10px;
+.step-box-header {
+  margin-bottom: 20px;
 }
 
-.title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #fff;
-  margin: 0;
-}
-
-.number {
-  font-size: 2.8rem;
-  font-weight: 700;
-  background: linear-gradient(to bottom, #ccc, #333);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.step-number {
+  width: 40px;
+  height: 40px;
+  background: #6C7B8B;
+  color: white;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 12px;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
-
-.description {
-  font-size: 0.92rem;
+.step-title {
+  font-size: 1.4rem;
   color: #fff;
-  line-height: 1.4;
-  margin-top: 10px;
-  margin-bottom: 40px;
-  text-align: left;
+  margin-bottom: 10px;
+  text-align: inherit;  /* Inherit text alignment from parent */
 }
 
-
-.arrow {
-  align-self: center; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  margin: 0 10px;
+.step-description {
+  font-size: 1rem;
+  color: #aaa;
+  line-height: 1.6;
+  text-align: inherit;  /* Inherit text alignment from parent */
 }
 
-.arrow::before {
-  content: "";
-  width: 20px;
-  height: 20px;
-  background: linear-gradient(to bottom, #ccc, #333);
-  clip-path: polygon(0% 0%, 100% 50%, 0% 100%, 50% 50%);
+/* Text alignment for steps */
+.step-container:nth-child(2) .step-box,
+.step-container:nth-child(4) .step-box,
+.step-container:nth-child(6) .step-box {
+  text-align: right;
 }
 
+.step-container:nth-child(2) .step-number,
+.step-container:nth-child(4) .step-number,
+.step-container:nth-child(6) .step-number {
+  margin-left: auto;
+  margin-right: 0;
+}
 
+/* Alternate layouts */
+.step-container:not(.reverse) .step-left {
+  justify-content: flex-end;
+  padding-right: 100px;
+}
 
+.step-container:not(.reverse) .step-right {
+  padding-left: 100px;
+}
 
-@media (max-width: 768px) {
-  .row {
+.step-container.reverse .step-left {
+  padding-right: 100px;
+  justify-content: flex-end;
+}
+
+.step-container.reverse .step-right {
+  padding-left: 100px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .step-container {
     flex-direction: column;
-    align-items: center;
+    min-height: auto;
+    margin: 20px 0;
   }
-  .arrow {
-    display: none;
+  .step-container.reverse {
+    flex-direction: column-reverse;
   }
-  .box {
-    width: 100%;
-    max-width: 350px;
+  .step-left, .step-right {
+    padding: 20px 40px !important;
+    justify-content: flex-start !important;
+  }
+  .step-left img, .step-right img {
+    width: 100px;
+    height: 100px;
+    margin: 20px 0;
+  }
+  .step-box {
+    max-width: 100%;
+    margin-left: 60px;
   }
 }
 
-
-
+@media (max-width: 576px) {
+  .step-box {
+    margin-left: 40px;
+    padding: 20px;
+  }
+  .step-title {
+    font-size: 1.2rem;
+  }
+  .step-description {
+    font-size: 0.9rem;
+  }
+}
 
 .portfolio-grid {
   display: flex;

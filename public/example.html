@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6-Step Workflow Process</title>
+  <style>
+    /* ===== Base Styles ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+
+    /* ===== Progress Line Styles ===== */
+    .page-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    .page-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background-color: #e0e0e0;
+      z-index: 0;
+    }
+
+    .progress-line {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      width: 3px;
+      background-color: #3498db;
+      height: 0;
+      z-index: 1;
+      transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(-50%);
+    }
+
+    /* ===== Step Container Styles ===== */
+    .container {
+      display: flex;
+      width: 100%;
+      min-height: 500px;
+      position: relative;
+      z-index: 2;
+      margin: 100px 0;
+      opacity: 0.3;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .container.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .left, .right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 30px;
+    }
+
+    /* ===== Content Styling ===== */
+    .box {
+      max-width: 450px;
+      padding: 40px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .box:hover {
+      transform: translateY(-5px);
+    }
+
+    .box-header {
+      margin-bottom: 25px;
+    }
+
+    .box-header .number {
+      width: 45px;
+      height: 45px;
+      background: #3498db;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .box-header .title {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    /* ===== Image Styling ===== */
+    .left img, .right img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .left img:hover, .right img:hover {
+      transform: scale(1.08);
+    }
+
+    /* ===== Layout Adjustments ===== */
+    .container:not(.reverse) .left {
+      justify-content: flex-end;
+      padding-right: 120px;
+    }
+
+    .container:not(.reverse) .right {
+      padding-left: 120px;
+    }
+
+    .container.reverse .left {
+      padding-right: 120px;
+      justify-content: flex-end;
+    }
+
+    .container.reverse .right {
+      padding-left: 120px;
+    }
+
+    /* ===== Responsive Design ===== */
+    @media (max-width: 1200px) {
+      .page-wrapper {
+        padding: 60px 20px;
+      }
+      
+      .container {
+        min-height: 400px;
+        margin: 80px 0;
+      }
+      
+      .box {
+        padding: 30px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .page-wrapper::before,
+      .progress-line {
+        left: 40px;
+      }
+
+      .container {
+        flex-direction: column;
+        min-height: auto;
+        margin: 60px 0;
+      }
+
+      .container.reverse {
+        flex-direction: column-reverse;
+      }
+
+      .left, .right {
+        padding: 30px 40px !important;
+        justify-content: flex-start !important;
+      }
+
+      .left img, .right img {
+        width: 120px;
+        height: 120px;
+        margin: 30px 0;
+      }
+
+      .box {
+        max-width: 100%;
+        margin-left: 80px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .box-header .title {
+        font-size: 1.6rem;
+      }
+      
+      .description {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .page-wrapper::before,
+      .progress-line {
+        left: 20px;
+      }
+
+      .box {
+        margin-left: 50px;
+        padding: 25px;
+      }
+
+      .box-header .number {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+
+      .box-header .title {
+        font-size: 1.4rem;
+      }
+
+      .left img, .right img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="progress-line"></div>
+
+    <!-- Step 1 -->
+    <div class="container">
+      <div class="left">
+        <img src="/public/images/step1-icon.png" alt="Contact Icon">
+      </div>
+      <div class="right">
+        <div class="box">
+          <div class="box-header">
+            <span class="number">1</span>
+            <h3 class="title">Contact & Share Your Idea</h3>
+          </div>
+          <p class="description">
+            Send me a message with details about your website pages, sections, 
+            and features needed. We'll schedule an initial consultation to discuss 
+            your vision and requirements.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="container reverse">
+      <div class="left">
+        <div class="box">
+          <div class="box-header">
+            <span class="number">2</span>
+            <h3 class="title">Discussion & Price Agreement</h3>
+          </div>
+          <p class="description">
+            We'll discuss project details via video call or chat. After researching 
+            your needs, I'll provide a detailed quote. Upon agreement, a 50% 
+            deposit secures your project timeline.
+          </p>
+        </div>
+      </div>
+      <div class="right">
+        <img src="/public/images/step2-icon.png" alt="Discussion Icon">
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="container">
+      <div class="left">
+        <img src="/public/images/step3-icon.png" alt="Content Icon">
+      </div>
+      <div class="right">
+        <div class="box">
+          <div class="box-header">
+            <span class="number">3</span>
+            <h3 class="title">Content Collection & Development</h3>
+          </div>
+          <p class="description">
+            You provide brand materials (text, images, logos) through our secure 
+            portal. I begin building your website with daily updates and a staging 
+            area for real-time feedback.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="container reverse">
+      <div class="left">
+        <div class="box">
+          <div class="box-header">
+            <span class="number">4</span>
+            <h3 class="title">Review & Revisions</h3>
+          </div>
+          <p class="description">
+            Test the complete website in a live environment. Two rounds of 
+            revisions included, with additional changes available at negotiated 
+            rates. Final approval required before launch.
+          </p>
+        </div>
+      </div>
+      <div class="right">
+        <img src="/public/images/step4-icon.png" alt="Review Icon">
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="container">
+      <div class="left">
+        <img src="/public/images/step5-icon.png" alt="Payment Icon">
+      </div>
+      <div class="right">
+        <div class="box">
+          <div class="box-header">
+            <span class="number">5</span>
+            <h3 class="title">Final Payment & Launch Prep</h3>
+          </div>
+          <p class="description">
+            After final approval, remaining balance is due. I conduct performance 
+            optimization, cross-browser testing, and mobile responsiveness checks 
+            prior to deployment.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="container reverse">
+      <div class="left">
+        <div class="box">
+          <div class="box-header">
+            <span class="number">6</span>
+            <h3 class="title">Deployment & Support</h3>
+          </div>
+          <p class="description">
+            Full deployment to your hosting environment. Domain configuration, 
+            SSL setup, and basic SEO implementation. Includes 30 days of 
+            post-launch support and maintenance.
+          </p>
+        </div>
+      </div>
+      <div class="right">
+        <img src="/public/images/step6-icon.png" alt="Deployment Icon">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Smooth Scroll and Progress Logic
+    (function() {
+      const progressLine = document.querySelector('.progress-line');
+      const containers = document.querySelectorAll('.container');
+      let isScrolling = false;
+
+      // Throttle scroll events
+      window.addEventListener('scroll', throttle(updateProgress, 100));
+      window.addEventListener('resize', throttle(updateProgress, 100));
+
+      function updateProgress() {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progressPercentage = (window.scrollY / totalHeight) * 100;
+        progressLine.style.height = `${progressPercentage}%`;
+
+        containers.forEach(container => {
+          const rect = container.getBoundingClientRect();
+          const containerCenter = rect.top + rect.height/2;
+          
+          if(containerCenter < window.innerHeight * 0.75 && containerCenter > window.innerHeight * 0.25) {
+            container.classList.add('active');
+          } else {
+            container.classList.remove('active');
+          }
+        });
+      }
+
+      function throttle(fn, wait) {
+        let time = Date.now();
+        return function() {
+          if ((time + wait - Date.now()) < 0) {
+            fn();
+            time = Date.now();
+          }
+        }
+      }
+
+      // Initial update
+      updateProgress();
+      
+      // Intersection Observer for smoother transitions
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+
+      containers.forEach(container => observer.observe(container));
+    })();
+  </script>
+</body>
+</html>
