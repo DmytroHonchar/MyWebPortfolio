@@ -633,6 +633,36 @@ section p {
   }
 }
 
+.portfolio {
+  background: #111;
+  padding: 60px 0;
+}
+
+.portfolio-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.portfolio-title {
+  font-size: 2rem;
+  line-height: 1.3;
+  text-align: center;
+  color: #fff;
+  max-width: 800px;
+  margin: 0 auto 40px;
+}
+
+.portfolio-title .highlight {
+  background-color: #6C7B8B;
+  color: #fff;
+  padding: 0 4px;
+  border-radius: 2px;
+}
+
 .portfolio-grid {
   display: flex;
   flex-wrap: wrap;
@@ -697,20 +727,172 @@ section p {
   font-weight: 600;
 }
 
-.testimonials-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
+@media (max-width: 992px) {
+  .portfolio-item {
+    flex: 1 1 calc(50% - 40px);
+    max-width: calc(50% - 40px);
+  }
 }
 
-.testimonial-item {
-  background: #111;
-  padding: 20px;
-  border-radius: 8px;
-  flex: 1 1 calc(45% - 60px);
-  max-width: calc(45% - 60px);
+@media (max-width: 576px) {
+  .portfolio-item {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+  
+  .portfolio-logo {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.testimonials {
+  background: #000;
+  padding: 80px 0;
+}
+
+.testimonials-header {
   text-align: center;
+  margin-bottom: 60px;
+}
+
+.testimonials-subtitle {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 15px;
+  opacity: 0.8;
+}
+
+.testimonials-title {
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+.testimonials-title .highlight {
+  background: #6C7B8B;
+  padding: 0 10px;
+  border-radius: 4px;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  background: #1a1a1a;
+  border-radius: 20px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card.dark {
+  background: #111;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+}
+
+.testimonial-icon {
+  margin-bottom: 25px;
+}
+
+.testimonial-icon img {
+  width: 40px;
+  height: 40px;
+  opacity: 0.6;
+}
+
+.testimonial-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.testimonial-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 30px;
+  flex: 1;
+  text-align: left;
+}
+
+.testimonial-author {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.author-info {
+  flex: 1;
+}
+
+.author-info h4 {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0 0 5px 0;
+  font-weight: 600;
+  text-align: left;
+}
+
+.author-info span {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: left;
+}
+
+.testimonial-quote-end {
+  margin-left: 20px;
+}
+
+.testimonial-quote-end img {
+  width: 30px;
+  height: 30px;
+  opacity: 0.6;
+  transform: rotate(180deg);
+}
+
+@media (max-width: 992px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .testimonial-card {
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 576px) {
+  .testimonials-title {
+    font-size: 2.2rem;
+  }
+  
+  .testimonial-card {
+    padding: 30px;
+    min-height: auto;
+  }
+  
+  .testimonial-content h3 {
+    font-size: 1.5rem;
+  }
 }
 
 #contactForm {
@@ -767,25 +949,6 @@ footer {
   }
 }
 
-@media (max-width: 992px) {
-  .portfolio-item {
-    flex: 1 1 calc(50% - 40px);
-    max-width: calc(50% - 40px);
-  }
-}
-
-@media (max-width: 576px) {
-  .portfolio-item {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-  
-  .portfolio-logo {
-    width: 150px;
-    height: 150px;
-  }
-}
-
 @font-face {
   font-family: 'Poppins';
   src: url('/public/font-family/Poppins-Medium.ttf') format('opentype');
@@ -802,34 +965,4 @@ footer {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-}
-
-.portfolio {
-  background: #111;
-  padding: 60px 0;
-}
-
-.portfolio-subtitle {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 10px;
-  text-align: center;
-  opacity: 0.8;
-}
-
-.portfolio-title {
-  font-size: 2rem;
-  line-height: 1.3;
-  text-align: center;
-  color: #fff;
-  max-width: 800px;
-  margin: 0 auto 40px;
-}
-
-.portfolio-title .highlight {
-  background-color: #6C7B8B;
-  color: #fff;
-  padding: 0 4px;
-  border-radius: 2px;
 }
