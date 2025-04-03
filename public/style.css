@@ -594,6 +594,7 @@ section p {
   text-align: left;
 }
 
+
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .step-container {
@@ -635,28 +636,65 @@ section p {
 .portfolio-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 40px;
   justify-content: center;
+  align-items: center;
 }
 
 .portfolio-item {
   background: #111;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 30px;
+  border-radius: 12px;
   flex: 1 1 calc(30% - 40px);
   max-width: calc(30% - 40px);
   text-align: center;
   transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #333;
+  text-decoration: none;
+  color: inherit;
 }
 
 .portfolio-item:hover {
   transform: translateY(-10px);
+  border-color: #6C7B8B;
+  text-decoration: none;
+  color: inherit;
 }
 
-.portfolio-item img {
+.portfolio-logo {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a1a;
+  border-radius: 50%;
+  padding: 20px;
+  border: 2px solid #333;
+  transition: all 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-logo {
+  border-color: #6C7B8B;
+  transform: scale(1.05);
+}
+
+.portfolio-logo img {
   width: 100%;
-  border-radius: 8px;
-  margin-bottom: 15px;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.portfolio-item h3 {
+  font-size: 1.4rem;
+  color: #fff;
+  margin: 0;
+  font-weight: 600;
 }
 
 .testimonials-grid {
@@ -729,7 +767,69 @@ footer {
   }
 }
 
+@media (max-width: 992px) {
+  .portfolio-item {
+    flex: 1 1 calc(50% - 40px);
+    max-width: calc(50% - 40px);
+  }
+}
+
+@media (max-width: 576px) {
+  .portfolio-item {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+  
+  .portfolio-logo {
+    width: 150px;
+    height: 150px;
+  }
+}
+
 @font-face {
   font-family: 'Poppins';
   src: url('/public/font-family/Poppins-Medium.ttf') format('opentype');
+}
+
+/* Special styling for step number 4 - placed at the end to override all previous styles */
+#step-number-4 {
+  width: 35px;
+  height: 40px;
+  background: #6C7B8B;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.portfolio {
+  background: #111;
+  padding: 60px 0;
+}
+
+.portfolio-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.portfolio-title {
+  font-size: 2rem;
+  line-height: 1.3;
+  text-align: center;
+  color: #fff;
+  max-width: 800px;
+  margin: 0 auto 40px;
+}
+
+.portfolio-title .highlight {
+  background-color: #6C7B8B;
+  color: #fff;
+  padding: 0 4px;
+  border-radius: 2px;
 }
