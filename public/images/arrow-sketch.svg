@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10,40 C30,35 50,45 70,40 L90,35 L85,25 L110,40 L85,55 L90,45 L70,40" 
+        fill="none" 
+        stroke="#fff" 
+        stroke-width="3" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        style="stroke-dasharray: 4,4"/>
+  <path d="M8,40 C28,33 48,47 68,42 L88,37 L83,27 L108,42 L83,57 L88,47 L68,42" 
+        fill="none" 
+        stroke="#fff" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        style="stroke-dasharray: 3,3;opacity:0.5"/>
+</svg> 
