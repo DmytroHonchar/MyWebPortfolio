@@ -391,14 +391,132 @@
   <!-- Contact Section -->
   <section id="contact" class="contact" data-aos="fade-up">
     <div class="container">
-      <h2>Contact Me</h2>
-      <p>Ready to elevate your business online? Let's talk about your project.</p>
-      <form id="contactForm">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn">Send Message</button>
+      <h3 class="contact-subtitle" data-aos="fade-up" data-aos-delay="50" data-aos-anchor-placement="top-bottom">
+        Get In Touch
+      </h3>
+      <h1 class="contact-title" data-aos="fade-up" data-aos-delay="100" data-aos-anchor-placement="top-bottom">
+        Let's Create Something <span class="highlight">Amazing</span> Together
+      </h1>
+      <div class="contact-form-wrapper">
+        <form id="contactForm" class="contact-form" data-aos="fade-up" data-aos-delay="150">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="businessType">Type of Business</label>
+              <select id="businessType" name="businessType" required>
+                <option value="">Select business type</option>
+                <option value="restaurant">Restaurant/Cafe</option>
+                <option value="beauty">Beauty/Barber Shop</option>
+                <option value="store">Instagram/Online Store</option>
+                <option value="local">Local Service Business</option>
+                <option value="fitness">Gym/Fitness</option>
+                <option value="other">Other Small Business</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="serviceType">Service Needed</label>
+              <select id="serviceType" name="serviceType" required>
+                <option value="">Select service type</option>
+                <option value="new-website">New Website Creation</option>
+                <option value="redesign">Website Redesign</option>
+                <option value="fixes">Website Fixes/Updates</option>
+                <option value="features">Add New Features</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="projectSize">Project Size</label>
+              <select id="projectSize" name="projectSize" required>
+                <option value="">Select project size</option>
+                <option value="landing">Landing Page (1 page)</option>
+                <option value="small">Small (2-3 pages)</option>
+                <option value="medium">Medium (4-6 pages)</option>
+                <option value="large">Large (7+ pages)</option>
+                <option value="custom">Custom (Special Requirements)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="timeline">Timeline</label>
+              <select id="timeline" name="timeline" required>
+                <option value="">Select timeline</option>
+                <option value="asap">ASAP (1-2 weeks)</option>
+                <option value="normal">Normal (2-4 weeks)</option>
+                <option value="flexible">Flexible (4+ weeks)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="budget">Budget Range</label>
+              <select id="budget" name="budget" required>
+                <option value="">Select budget range</option>
+                <option value="200-500">£200 - £500</option>
+                <option value="500-1000">£500 - £1000</option>
+                <option value="1000-2000">£1000 - £2000</option>
+                <option value="discuss">Let's Discuss</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label>Key Features Needed</label>
+              <div class="features-grid">
+                <label class="feature-checkbox">
+                  <input type="checkbox" name="features[]" value="booking">
+                  <span class="checkbox-custom"></span>
+                  <span class="feature-label">Booking System</span>
+                </label>
+                <label class="feature-checkbox">
+                  <input type="checkbox" name="features[]" value="menu">
+                  <span class="checkbox-custom"></span>
+                  <span class="feature-label">Menu/Products Display</span>
+                </label>
+                <label class="feature-checkbox">
+                  <input type="checkbox" name="features[]" value="gallery">
+                  <span class="checkbox-custom"></span>
+                  <span class="feature-label">Photo Gallery</span>
+                </label>
+                <label class="feature-checkbox">
+                  <input type="checkbox" name="features[]" value="contact">
+                  <span class="checkbox-custom"></span>
+                  <span class="feature-label">Contact Form</span>
+                </label>
+                <label class="feature-checkbox">
+                  <input type="checkbox" name="features[]" value="social">
+                  <span class="checkbox-custom"></span>
+                  <span class="feature-label">Social Media Integration</span>
+                </label>
+                <label class="feature-checkbox">
+                  <input type="checkbox" name="features[]" value="maps">
+                  <span class="checkbox-custom"></span>
+                  <span class="feature-label">Google Maps</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="requirements">Additional Requirements</label>
+            <textarea id="requirements" name="requirements" placeholder="Please describe any specific requirements, custom features, or additional information about your project." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            Send Message
+          </button>
       </form>
+      </div>
     </div>
   </section>
 
