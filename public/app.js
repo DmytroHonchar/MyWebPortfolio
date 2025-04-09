@@ -79,4 +79,69 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   window.addEventListener('resize', mobileMenuToggle);
   mobileMenuToggle();
+
+  // Email and Phone Protection
+  // Handle email protection
+  const emailLinks = document.querySelectorAll('.email-protect');
+  emailLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const email = this.getAttribute('data-email');
+      this.textContent = email;
+      this.href = `mailto:${email}`;
+    });
+  });
+
+  // Handle phone protection
+  const phoneLinks = document.querySelectorAll('.phone-protect');
+  phoneLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const phone = this.getAttribute('data-phone');
+      this.textContent = phone;
+      this.href = `tel:${phone}`;
+    });
+  });
+
+  // Bot Protection
+  // Set data-text attribute for no-bot elements
+  document.querySelectorAll('.no-bot').forEach(function(element) {
+    element.setAttribute('data-text', element.textContent);
+  });
+
+  // Bot Protection - Obfuscate email and phone after page loads
+  setTimeout(function() {
+    // Find all email and phone links
+    const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+    const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+    
+    // Obfuscate email addresses
+    emailLinks.forEach(function(link) {
+      const email = link.getAttribute('href').replace('mailto:', '');
+      const parts = email.split('@');
+      if (parts.length === 2) {
+        const username = parts[0];
+        const domain = parts[1];
+        
+        // Create a slightly obfuscated version for bots
+        const obfuscatedUsername = username.split('').reverse().join('');
+        const obfuscatedDomain = domain.split('').reverse().join('');
+        
+        // Add data attributes with obfuscated values
+        link.setAttribute('data-username', obfuscatedUsername);
+        link.setAttribute('data-domain', obfuscatedDomain);
+      }
+    });
+    
+    // Obfuscate phone numbers
+    phoneLinks.forEach(function(link) {
+      const phone = link.getAttribute('href').replace('tel:', '');
+      
+      // Create a slightly obfuscated version for bots
+      const obfuscatedPhone = phone.split('').reverse().join('');
+      
+      // Add data attribute with obfuscated value
+      link.setAttribute('data-phone', obfuscatedPhone);
+    });
+  }, 1000);
 });
