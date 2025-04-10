@@ -11,6 +11,42 @@
   <meta property="og:url" content="https://yourdomain.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Testimonial card styles with AOS compatibility */
+    .testimonial-card {
+      background: #1a1a1a;
+      border-radius: 16px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transform: translateY(0);
+      will-change: transform, box-shadow, background-color;
+    }
+
+    .testimonial-card.dark {
+      background: #1a1a1a;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-8px) !important;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+      background-color: #222;
+    }
+
+    /* Override AOS styles for testimonial cards */
+    [data-aos].testimonial-card.aos-animate {
+      transform: translateY(0) !important;
+    }
+
+    [data-aos].testimonial-card.aos-animate:hover {
+      transform: translateY(-8px) !important;
+    }
+  </style>
 </head>
 <body>
   <nav class="icon-navbar">
@@ -266,19 +302,19 @@
         Websites That <span class="highlight">Transform</span> Local Businesses
       </h1>
       <div class="portfolio-grid">
-        <a href="https://momoslvp.com/" target="_blank" class="portfolio-item" data-aos="flip-left">
+        <a href="https://momoslvp.com/" target="_blank" class="portfolio-item" data-aos="zoom-in" data-aos-delay="150" data-aos-duration="800">
           <div class="portfolio-logo">
             <img src="/public/images/momos.svg" alt="Momos Restaurant Logo">
           </div>
           <h3>Momo's Restaurant</h3>
         </a>
-        <a href="https://dagurkhafinedining.com/" target="_blank" class="portfolio-item" data-aos="flip-left" data-aos-delay="100">
+        <a href="https://dagurkhafinedining.com/" target="_blank" class="portfolio-item" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800">
           <div class="portfolio-logo">
             <img src="/public/images/dagurkha.svg" alt="Da Gurkha Restaurant Logo">
           </div>
           <h3>Da Gurkha Restaurant</h3>
         </a>
-        <a href="https://cosebuoneliverpool.onrender.com/" target="_blank" class="portfolio-item" data-aos="flip-left" data-aos-delay="200">
+        <a href="https://cosebuoneliverpool.onrender.com/" target="_blank" class="portfolio-item" data-aos="zoom-in" data-aos-delay="450" data-aos-duration="800">
           <div class="portfolio-logo">
             <img src="/public/images/demo.svg" alt="Demo Italian Restaurant Logo">
           </div>
@@ -289,14 +325,14 @@
   </section>
 
   <!-- Testimonials Section -->
-  <section id="testimonials" class="testimonials">
+  <section id="testimonials" class="testimonials" data-aos="fade-up">
     <div class="container">
-      <div class="testimonials-header">
+      <div class="testimonials-header" data-aos="fade-up" data-aos-delay="50">
         <span class="testimonials-subtitle">Client Feedback</span>
         <h2 class="testimonials-title">What My <span class="highlight">Clients Say</span></h2>
       </div>
       <div class="testimonials-grid">
-        <div class="testimonial-card">
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="150">
           <div class="testimonial-icon">
             <img src="/public/images/quote2.png" alt="Quote">
           </div>
@@ -316,7 +352,7 @@
           </div>
         </div>
 
-        <div class="testimonial-card dark">
+        <div class="testimonial-card dark" data-aos="fade-up" data-aos-delay="300">
           <div class="testimonial-icon">
             <img src="/public/images/quote2.png" alt="Quote">
           </div>
@@ -519,7 +555,7 @@
   <footer>
     <div class="container">
       <div class="footer-content">
-        <div class="footer-section">
+        <div class="footer-section" data-aos="fade-up" data-aos-delay="100">
           <h3>Quick Links</h3>
           <ul class="footer-links">
             <li><a href="#hero">Home</a></li>
@@ -531,7 +567,7 @@
           </ul>
         </div>
         
-        <div class="footer-section">
+        <div class="footer-section" data-aos="fade-up" data-aos-delay="200">
           <h3>Contact Info</h3>
           <ul class="contact-info">
             <li>
@@ -549,7 +585,7 @@
           </ul>
         </div>
         
-        <div class="footer-section">
+        <div class="footer-section" data-aos="fade-up" data-aos-delay="300">
           <h3>Social Media</h3>
           <div class="social-links">
             <a href="https://linkedin.com/in/dmytro-honchar-26b308239/" target="_blank" aria-label="LinkedIn">

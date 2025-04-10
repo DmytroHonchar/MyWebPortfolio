@@ -1015,7 +1015,10 @@ body {
   min-height: 320px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+  will-change: transform, box-shadow, background-color;
 }
 
 .testimonial-card.dark {
@@ -1023,7 +1026,18 @@ body {
 }
 
 .testimonial-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px) !important;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  background-color: #222;
+}
+
+/* Override AOS styles for testimonial cards */
+[data-aos].testimonial-card.aos-animate {
+  transform: translateY(0) !important;
+}
+
+[data-aos].testimonial-card.aos-animate:hover {
+  transform: translateY(-8px) !important;
 }
 
 .testimonial-icon {

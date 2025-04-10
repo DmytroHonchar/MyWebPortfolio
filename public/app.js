@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     AOS.init({ 
       duration: 800, 
       once: true,
-      offset: 100,
+      offset: 50,
       easing: 'ease-out-cubic',
       delay: 0
     });
@@ -55,6 +55,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     item.addEventListener('mouseleave', () => {
       item.style.transform = 'translateY(0)';
+    });
+  });
+
+  // Testimonial card hover effect with AOS compatibility
+  const testimonialCards = document.querySelectorAll('.testimonial-card');
+  testimonialCards.forEach(card => {
+    // Store original transform for reset
+    const originalTransform = window.getComputedStyle(card).transform;
+    
+    card.addEventListener('mouseenter', () => {
+      // Apply hover effect regardless of AOS state
+      card.style.transform = 'translateY(-8px)';
+      card.style.boxShadow = '0 8px 15px rgba(0, 0, 0, 0.3)';
+      card.style.backgroundColor = '#222';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      // Reset to original state
+      card.style.transform = originalTransform;
+      card.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
+      card.style.backgroundColor = '#1a1a1a';
     });
   });
 
