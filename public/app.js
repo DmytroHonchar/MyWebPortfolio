@@ -90,16 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Mobile menu toggle (if needed)
-  const mobileMenuToggle = () => {
-    const nav = document.querySelector('.icon-navbar');
-    if (window.innerWidth <= 768) {
-      nav.classList.add('mobile-hidden');
-      // Add mobile menu toggle logic if necessary
-    }
-  };
-  window.addEventListener('resize', mobileMenuToggle);
-  mobileMenuToggle();
+
 
   // Email and Phone Protection
   // Handle email protection

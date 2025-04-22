@@ -11,44 +11,9 @@
   <meta property="og:url" content="https://yourdomain.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Testimonial card styles with AOS compatibility */
-    .testimonial-card {
-      background: #1a1a1a;
-      border-radius: 16px;
-      padding: 30px;
-      position: relative;
-      overflow: hidden;
-      min-height: 320px;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transform: translateY(0);
-      will-change: transform, box-shadow, background-color;
-    }
-
-    .testimonial-card.dark {
-      background: #1a1a1a;
-    }
-
-    .testimonial-card:hover {
-      transform: translateY(-8px) !important;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-      background-color: #222;
-    }
-
-    /* Override AOS styles for testimonial cards */
-    [data-aos].testimonial-card.aos-animate {
-      transform: translateY(0) !important;
-    }
-
-    [data-aos].testimonial-card.aos-animate:hover {
-      transform: translateY(-8px) !important;
-    }
-  </style>
 </head>
 <body>
+  <div class="nav_container">
   <nav class="icon-navbar">
     <a href="#hero" class="nav-item">
       <img src="/public/images/home.png" alt="Home">
@@ -75,7 +40,7 @@
       <span class="nav-label">Contact</span>
     </a>
   </nav>
-
+  </div>
   <!-- Hero Section -->
   <section id="hero" class="hero" data-aos="fade">
     <div class="hero-content">
@@ -107,15 +72,13 @@
       <div class="services-grid">
         <!-- Card 1 -->
         <div class="service-card black-card" data-aos="zoom-in" data-aos-delay="150" data-aos-anchor-placement="top-bottom">
-          <div class="service-card-inner">
-            <div class="service-icon">
-              <img src="/public/images/responsive.png" alt="Custom Design & Mobile Ready">
-            </div>
-            <h2>Custom Design</h2>
-            <p>
-              A simple, clean design tailored to your business needs, working smoothly on phones, tablets, and computers.
-            </p>
+          <div class="service-icon">
+            <img src="/public/images/responsive.png" alt="Custom Design & Mobile Ready">
           </div>
+          <h2>Custom Design</h2>
+          <p>
+            A simple, clean design tailored to your business needs, working smoothly on phones, tablets, and computers.
+          </p>
         </div>
         <!-- Card 2 -->
         <div class="service-card black-card" data-aos="zoom-in" data-aos-delay="300" data-aos-anchor-placement="top-bottom">
