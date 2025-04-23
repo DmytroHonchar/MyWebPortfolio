@@ -1610,73 +1610,29 @@ footer {
   }
 
   .service-card {
-    min-height: auto;
-    padding: 30px;
-    margin: 0 15px;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 100%;
-  }
-
-  /* Left-aligned cards (odd numbers) */
-  .service-card:nth-child(odd) {
-    margin-right: auto;
-    margin-left: 0;
     width: 85%;
-    align-items: right;
-    text-align: right;
+    margin: 0;
   }
 
-  /* Right-aligned cards (even numbers) */
+  .service-card:nth-child(odd) {
+    margin-left: 0;
+    margin-right: auto;
+    text-align: left;
+  }
+
   .service-card:nth-child(even) {
     margin-left: auto;
     margin-right: 0;
-    width: 85%;
-    align-items: right;
+    text-align: right;
+  }
+
+  .service-card:nth-child(even) h2,
+  .service-card:nth-child(even) p {
     text-align: right;
   }
 
   .service-card:nth-child(even) .service-icon {
     align-self: flex-end;
-  }
-
-  .service-card:nth-child(odd) .service-icon {
-    align-self: flex-start;
-  }
-
-  .service-icon {
-    width: 70px;
-    height: 70px;
-    min-width: 70px;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .service-icon img {
-    width: 32px;
-    height: 32px;
-  }
-
-  .service-card h2 {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-    width: 100%;
-  }
-
-  .service-card p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin: 0;
-    width: 100%;
-  }
-
-
-  .service-card black-card{
-    gap: 15px;
   }
 
   /* Steps */
