@@ -1568,7 +1568,7 @@ footer {
 
   .outline-text1,
   .outline-text2 {
-    font-size: 1.9rem;
+    font-size: 2.2rem;
     line-height: 1.2;
     margin-bottom: 8px;
   }
@@ -1635,14 +1635,107 @@ footer {
     align-self: flex-end;
   }
 
-  /* Steps */
-  .custom-steps-section {
-    padding: 40px 10px;
-  }
+    /* hide desktop timeline */
+    .custom-steps-section {
+      display: none;
+    }
   
-  .steps-page-wrapper {
-    padding: 10px;
-  }
+    /* show mobile section */
+    .mobile-steps-section {
+      display: block;
+      background: #0a0a0a;       /* match desktop background if you like */
+      padding: 40px 0 20px;
+    }
+    .mobile-steps-section .container {
+      width: 90%;
+      max-width: 400px;
+      margin: 0 auto 20px;
+      text-align: center;
+    }
+    .mobile-steps-section .steps-subtitle {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      opacity: 0.8;
+      margin-bottom: 5px;
+    }
+    .mobile-steps-section .steps-title {
+      font-size: 1.5rem;
+      line-height: 1.3;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .mobile-steps-section .steps-title .highlight {
+      background: linear-gradient(to right, #8899AA, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+  
+    /* container-steps & timeline */
+    .container-steps {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      align-items: center;
+      gap: 40px;
+      padding: 30px 0 30px;
+    }
+    .container-steps::before {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 3px;
+      background: #6C7B8B;
+      z-index: 1;
+    }
+  
+    /* step-box style */
+    .step-box {
+      position: relative;
+      z-index: 2;
+      width: 74%;
+      height: 196px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 25px;
+      text-align: left;
+      overflow: hidden;  
+    }
+  
+    /* odd/even alignment */
+    .step-box.odd {
+      margin-left: 70px;
+    }
+    .step-box.even {
+      margin-right: 70px;
+    }
+  
+    /* inner layout */
+    .step-ic-tx {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .step-ic-tx img {
+      width: 42px;
+      height: 36px;
+    }
+    .step-ic-tx h1 {
+      font-size: 1.1rem;
+      color: #fff;
+      margin: 0;
+    }
+    .step-box p {
+      font-size: 0.95rem;
+      color: #aaa;
+      line-height: 1.4;
+      margin: 0;
+    }
+ 
 
   /* Portfolio */
   .portfolio {
@@ -1720,3 +1813,11 @@ footer {
   }
 }
 /* ====================== END MOBILE STYLES ====================== */
+
+
+/* ==================== HIDE MOBILE ON DESKTOP (>768px) ==================== */
+@media screen and (min-width: 769px) {
+  .mobile-steps-section {
+    display: none;
+  }
+}
