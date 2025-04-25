@@ -1738,18 +1738,35 @@ footer {
  
 
   /* Portfolio */
-  .portfolio {
-    padding: 40px 10px;
-  }
-  
   .portfolio-grid {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
     gap: 20px;
-    padding: 0;
+    overflow-x: auto;
+    padding: 20px 10px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    margin: 0 -10px;
   }
-  
+
   .portfolio-item {
-    width: 100%;
+    flex: 0 0 280px;
+    min-width: 240px;
+    scroll-snap-align: start;
+    margin: 0;
+    padding: 18px;
+    border-radius: 20px; 
+  }
+
+  .portfolio-logo {
+    width: 140px;
+    height: 140px;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .portfolio-grid::-webkit-scrollbar {
+    display: none;
   }
 
   /* Testimonials */
