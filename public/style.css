@@ -1737,37 +1737,60 @@ footer {
     }
  
 
-  /* Portfolio */
-  .portfolio-grid {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    overflow-x: auto;
-    padding: 20px 10px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    margin: 0 -10px;
-  }
+ /* Portfolio */
+.portfolio-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px 10px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; 
+  margin: 0 -10px;
+   overflow: hidden; 
+}
 
-  .portfolio-item {
-    flex: 0 0 280px;
-    min-width: 240px;
-    scroll-snap-align: start;
-    margin: 0;
-    padding: 18px;
-    border-radius: 20px; 
-  }
+.portfolio-item {
+  display: flex;       
+  flex-direction: row;        
+  align-items: center;  
+  gap: 12px;                 
+  flex: 0 0 auto;          
+  min-width: 320px;
+  scroll-snap-align: start;
+  margin: 0;
+  padding: 18px;
+  border-radius: 20px;
+  background: #1a1a1a;      
+  overflow: hidden; 
+}
 
-  .portfolio-logo {
-    width: 140px;
-    height: 140px;
-  }
+.portfolio-logo {
+  width: 120px !important; 
+  height: 120px !important;
+  flex-shrink: 0;             
+  border-radius: 16px;       
+  overflow: hidden;
+}
 
-  /* Hide scrollbar but keep functionality */
-  .portfolio-grid::-webkit-scrollbar {
-    display: none;
-  }
+.portfolio-logo img{
+  width: 120px !important;
+  height: 70px !important;
+}
+
+.portfolio-item h3 {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+  overflow: hidden; 
+}
+
+/* Hide scrollbar but keep functionality */
+.portfolio-grid::-webkit-scrollbar {
+  display: none;
+}
 
   /* Testimonials */
   .testimonials {
