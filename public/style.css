@@ -1488,8 +1488,7 @@ footer {
   color: #fff;
 }
 
-/* Mobile  Styles */
-/* ====================== MOBILE STYLES (≤768px) ====================== */
+/* Mobile Styles */
 @media screen and (max-width: 768px) {
   /* Reset & Containers */
   *, html, body, section {
@@ -1596,6 +1595,104 @@ footer {
     white-space: nowrap;
     flex: 0 1 auto;
     min-width: 120px;
+  }
+
+  /* About Section Mobile Styles */
+  .about-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: #111;
+  }
+
+  .about-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .about-subtitle {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 12px;
+  }
+
+  .about-title {
+    font-size: 2rem;
+    line-height: 1.3;
+    margin-bottom: 40px;
+    padding: 0 20px;
+  }
+
+  .about-left {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .profile-image {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(108, 123, 139, 0.3);
+  }
+
+  .profile-name {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+
+  .profile-email {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 24px;
+  }
+
+  .download-cv-btn {
+    width: 100%;
+    max-width: 220px;
+    padding: 14px 0;
+    background: #242424;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+  }
+
+  .about-right {
+    padding: 0 20px;
+  }
+
+  .about-text, 
+  .about-personal {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .contact-link {
+    padding: 12px 24px;
+    background: rgba(108, 123, 139, 0.1);
+    border-radius: 30px;
+  }
+
+  .contact-link img {
+    width: 20px;
+    height: 20px;
   }
 
   /* Services */
@@ -1792,66 +1889,239 @@ footer {
   display: none;
 }
 
-  /* Testimonials */
+  /* Testimonials Mobile Styles */
   .testimonials {
-    padding: 40px 10px;
+    padding: 40px 0;
+    position: relative;
+    overflow: hidden;
   }
-  
+
   .testimonials-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 0;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0;
+    padding: 0 20px;
   }
 
-  /* About */
-  .about-section {
-    padding: 40px 10px;
-  }
-  
-  .about-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 10px;
+  .testimonials-grid::-webkit-scrollbar {
+    display: none;
   }
 
-  /* Contact */
-  .contact {
-    padding: 40px 10px;
+  .testimonial-card {
+    flex: 0 0 100%;
+    width: 100%;
+    margin-right: 15px;
+    scroll-snap-align: center;
+    min-height: auto;
+    padding: 25px;
+    transform: none !important;
   }
-  
-  .contact-form-wrapper {
-    padding: 15px;
+
+  .testimonial-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
   }
-  
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr;
+
+  .author-info h4 {
+    font-size: 1rem;
+  }
+
+  .author-info span {
+    font-size: 0.8rem;
+  }
+
+  /* Pagination dots */
+  .testimonials-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 10px 0;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background: #fff;
+    transform: scale(1.2);
+  }
+
+  /* Rest of mobile styles... */
+
+  /* Mobile Footer Styles */
+  footer {
+    padding: 30px 20px 20px;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 20px;
+  }
+
+  .footer-section h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .footer-links a {
+    padding: 4px 0;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+  }
+
+  .contact-info li {
+    min-height: 40px;
+    padding: 8px 0;
     gap: 10px;
   }
 
-  /* Footer */
-  footer {
-    padding: 40px 10px 20px;
-  }
-  
-  .footer-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
+  .social-links {
+    gap: 12px;
+    padding: 4px 0;
   }
 
-  /* Text & Images */
-  h1, h2, h3, p {
-    max-width: 100%;
-    word-wrap: break-word;
+  .footer-bottom {
+    padding-top: 16px;
   }
-  
-  img, .portfolio-logo img, .service-icon img {
-    max-width: 100%;
-    height: auto;
+
+  .footer-legal {
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .footer-legal a {
+    padding: 6px;
+    min-height: 36px;
+  }
+
+  /* Rest of your existing mobile styles... */
+
+  /* Mobile Contact Form Styles */
+  .contact {
+    padding: 20px 0;
+  }
+
+  .contact-form-wrapper {
+    margin: 0 15px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(26, 26, 26, 0.95);
+  }
+
+  .contact-subtitle {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .contact-title {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+  }
+
+  .contact-form {
+    gap: 15px;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    min-height: 45px;
+  }
+
+  .form-group select {
+    padding-right: 35px;
+    background-position: right 12px center;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px;
+    margin-top: 5px;
+  }
+
+  .feature-checkbox {
+    min-height: 44px;
+    padding: 8px 12px;
+  }
+
+  .feature-label {
+    font-size: 0.9rem;
+  }
+
+  .checkbox-custom {
+    width: 22px;
+    height: 22px;
+  }
+
+  .form-group textarea {
+    min-height: 120px;
+    font-size: 16px;
+  }
+
+  .submit-btn {
+    margin-top: 20px;
+    height: 50px;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+
+  /* Touch states */
+  .form-group input:active,
+  .form-group select:active,
+  .form-group textarea:active {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .feature-checkbox:active {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .submit-btn:active {
+    transform: scale(0.98);
+    background: #5C6B7B;
   }
 }
+
 /* ====================== END MOBILE STYLES ====================== */
 
 
