@@ -36,12 +36,11 @@ body {
   display: flex;
   align-items: center;
   border-radius: 20px;
-  margin: 0;
+  margin: 10px auto;
   padding: 8px 18px;
   width: fit-content;
 }
 
-/* Reset any potential inherited styles */
 .nav-item {
   position: relative;
   display: flex;
@@ -73,6 +72,8 @@ body {
   pointer-events: none;
   transition: transform 0.3s ease, opacity 0.3s ease, text-shadow 0.3s ease;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0);
+  max-width: none !important;
+  width: auto !important;
 }
 
 .nav-item:hover .nav-label {
@@ -88,7 +89,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: url('/public/images/bg6.jpg') no-repeat center center/cover;
+  background: url('/images/bg6.jpg') no-repeat center center/cover;
 }
 
 .hero::before {
@@ -812,14 +813,43 @@ body {
   margin: 0 auto 40px;
 }
 
-.portfolio-grid {
+/* Remove or comment out existing portfolio-grid styles */
+/* .portfolio-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
   justify-content: center;
   align-items: center;
+} */
+
+/* Add new desktop-specific media query */
+@media screen and (min-width: 769px) {
+  .portfolio-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch !important;  /* force children to equal height */
+    gap: 40px;
+  }
+
+  .portfolio-item {
+    display: flex;
+    flex-direction: column;           /* stack logo and title vertically */
+    justify-content: space-between;   /* space out content top-to-bottom */
+    flex: 1 1 calc(33.333% - 40px) !important;  /* three columns minus gaps */
+    max-width: calc(33.333% - 40px) !important;
+    min-height: 320px !important; /* Increased height */
+    padding: 40px 30px !important; /* Increased padding */
+  }
+
+  .portfolio-logo {
+    width: 200px !important; /* Slightly larger logo */
+    height: 200px !important;
+    margin-bottom: 30px !important;
+  }
 }
 
+/* Keep mobile styles outside media query */
 .portfolio-item {
   background: #111;
   padding: 30px;
@@ -1216,7 +1246,7 @@ footer {
 
 @font-face {
   font-family: 'Poppins';
-  src: url('/public/font-family/Poppins-Medium.ttf') format('opentype');
+  src: url('/font-family/Poppins-Medium.ttf') format('opentype');
 }
 
 /* Contact Section */
@@ -1662,6 +1692,7 @@ footer {
     border-radius: 30px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     font-size: 1rem;
+    margin-top: 0;
   }
 
   .about-right {
@@ -1837,56 +1868,44 @@ footer {
  /* Portfolio */
 .portfolio-grid {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 20px;
-  overflow-x: auto;
   padding: 20px 10px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; 
-  margin: 0 -10px;
-   overflow: hidden; 
+  margin: 0;
+  overflow: visible;
 }
 
 .portfolio-item {
-  display: flex;       
-  flex-direction: row;        
-  align-items: center;  
-  gap: 12px;                 
-  flex: 0 0 auto;          
-  min-width: 320px;
-  scroll-snap-align: start;
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px; /* Increased gap between logo and text */
   margin: 0;
-  padding: 18px;
-  border-radius: 20px;
-  background: #1a1a1a;      
-  overflow: hidden; 
+  padding: 20px;
+  border-radius: 16px;
+  background: #1a1a1a;
 }
 
 .portfolio-logo {
-  width: 120px !important; 
-  height: 120px !important;
-  flex-shrink: 0;             
-  border-radius: 16px;       
-  overflow: hidden;
+  width: 100px !important;
+  height: 100px !important;
+  flex-shrink: 0;
+  margin: 0;
 }
 
-.portfolio-logo img{
-  width: 120px !important;
-  height: 70px !important;
+.portfolio-logo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
 }
 
 .portfolio-item h3 {
   font-size: 1.2rem;
-  color: #fff;
   margin: 0;
-  line-height: 1.2;
-  overflow: hidden; 
-}
-
-/* Hide scrollbar but keep functionality */
-.portfolio-grid::-webkit-scrollbar {
-  display: none;
+  text-align: left;
+  padding-left: 10px; /* Added padding to move text right */
 }
 
   /* Testimonials Mobile Styles */
@@ -1957,7 +1976,7 @@ footer {
     transform: scale(1.2);
   }
 
-  /* Rest of mobile styles... */
+
 
   /* Mobile Footer Styles */
   footer {
@@ -2018,7 +2037,6 @@ footer {
     min-height: 36px;
   }
 
-  /* Rest of your existing mobile styles... */
 
   /* Mobile Contact Form Styles */
   .contact {
@@ -2073,10 +2091,49 @@ footer {
   }
 
   .features-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
+    overflow: hidden !important;      /* disable scrollbars */
+    max-height: none !important;      /* remove any height limits */
+    touch-action: none !important;    /* block swipe gestures */
+    pointer-events: auto;             /* keep checkboxes interactive */
+    display: grid;                    /* maintain layout */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+    gap: 8px !important;              /* consistent gutter */
     padding: 12px;
     margin-top: 5px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .feature-checkbox {
+    white-space: normal !important;   /* allow label text to wrap */
+    overflow: visible !important;     /* no internal clipping or scroll */
+    max-width: 100% !important;       /* constrain to parent width */
+    padding: 8px 12px !important;     /* consistent padding */
+    position: relative;
+    display: flex;
+    align-items: flex-start;          /* align to top for wrapping */
+    gap: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.03);
+    min-height: 44px;
+  }
+
+  .checkbox-custom {
+    max-width: 100%;
+    overflow: visible;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;                   /* prevent checkbox from shrinking */
+  }
+
+  .feature-label {
+    font-size: 0.9rem;
+    max-width: calc(100% - 32px);     /* account for checkbox width */
+    line-height: 1.3;
+    padding-top: 2px;                 /* align with checkbox */
   }
 
   .feature-checkbox {
@@ -2119,6 +2176,146 @@ footer {
   .submit-btn:active {
     transform: scale(0.98);
     background: #5C6B7B;
+  }
+
+  /* Common Section Headers for Mobile */
+  .section-header {
+    width: 100%;
+    overflow: hidden !important;
+    touch-action: none;
+    pointer-events: auto;
+    white-space: normal;
+    padding: 0 15px;
+    margin-bottom: 2rem;
+  }
+
+  /* Common subtitle styles */
+  .about-subtitle,
+  .services-subtitle,
+  .mobile-steps-section .steps-subtitle,
+  .portfolio-subtitle,
+  .testimonials-subtitle,
+  .contact-subtitle {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  /* Common title styles */
+  .about-title,
+  .services-title,
+  .mobile-steps-section .steps-title,
+  .portfolio-title,
+  .testimonials-title,
+  .contact-title {
+    font-size: 1.65rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    text-align: center;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+
+  /* About Section */
+  .about-section {
+    padding: 60px 20px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+
+  /* Services */
+  .services-section {
+    padding: 40px 0;
+    overflow: hidden;
+  }
+
+
+  /* Portfolio */
+  .portfolio {
+    padding: 40px 0;
+    overflow: hidden;
+  }
+
+  .portfolio-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 10px;
+    margin: 0;
+    overflow: visible;
+  }
+
+  .portfolio-item {
+    width: 100%;
+    min-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px; /* Increased gap between logo and text */
+    margin: 0;
+    padding: 20px;
+    border-radius: 16px;
+    background: #1a1a1a;
+  }
+
+  .portfolio-logo {
+    width: 100px !important;
+    height: 100px !important;
+    flex-shrink: 0;
+    margin: 0;
+  }
+
+  .portfolio-logo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+  }
+
+  .portfolio-item h3 {
+    font-size: 1.2rem;
+    margin: 0;
+    text-align: left;
+    padding-left: 10px; /* Added padding to move text right */
+  }
+
+  /* Testimonials */
+  .testimonials {
+    padding: 40px 0;
+    overflow: hidden;
+  }
+
+  .testimonials-grid {
+    display: flex;
+    overflow: hidden;
+    gap: 0;
+    padding: 0 20px;
+  }
+
+  /* Mobile Steps Section */
+  .mobile-steps-section {
+    overflow: hidden;
+  }
+
+  .container-steps {
+    overflow: hidden;
+  }
+
+  /* Contact */
+  .contact {
+    padding: 40px 0;
+    overflow: hidden;
+  }
+
+  #mob-links{
+    display: none;
   }
 }
 
