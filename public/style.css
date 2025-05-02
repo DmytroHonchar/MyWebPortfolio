@@ -1591,9 +1591,15 @@ footer {
 
   .outline-text1,
   .outline-text2 {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
     line-height: 1.2;
-    margin-bottom: 8px;
+  }
+
+  .outline-text1{
+    margin-top: 16px;
+  }
+  .outline-text2{
+    margin-bottom: 26px;
   }
 
   .subheading {
