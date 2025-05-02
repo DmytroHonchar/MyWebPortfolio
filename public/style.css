@@ -1574,7 +1574,7 @@ footer {
   /* Hero */
   .hero {
     height: auto;
-    min-height: 65vh;
+    min-height: 80vh;
     padding: 0;
     background-size: cover;
     background-position: top center;
