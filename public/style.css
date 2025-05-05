@@ -18,6 +18,13 @@ body {
   line-height: 1.6;
 }
 
+.container {
+  width: 100%;            
+  max-width: 1200px;    
+  margin: 0 auto;        
+  padding: 0 25px;      
+}
+
 
 .icon-navbar {
 position:absolute;
@@ -222,7 +229,6 @@ position:absolute;
   margin: 0 auto;
   padding: 10px 40px 20px; 
   border-radius: 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .about-left {
@@ -240,9 +246,8 @@ position:absolute;
   overflow: hidden;
   margin-bottom: 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  transition: border 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
   border: 3px solid transparent;
+  transition: all 0.3s ease;
 }
 
 .profile-image:hover {
@@ -454,6 +459,9 @@ position:absolute;
 .services-section {
   background: #111;
   padding: 60px 0;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 .services-subtitle {
@@ -477,10 +485,10 @@ position:absolute;
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  justify-items: stretch;
-  align-items: start;
-  perspective: 1000px;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .services-grid .service-card:nth-child(2),
@@ -1525,10 +1533,26 @@ footer {
   }
   
   .container {
+    padding: 0 15px;
     width: 100%;
     max-width: 100%;
-    padding: 10px;
     margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .about-container,
+  .services-grid,
+  .portfolio-grid,
+  .testimonials-grid {
+    margin-left: 15px !important;
+    margin-right: 15px !important;
   }
 
   /* Navbar */
