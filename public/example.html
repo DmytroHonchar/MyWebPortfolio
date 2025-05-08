@@ -1,68 +1,36 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="example.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cards Layout</title>
+  <link rel="stylesheet" href="example.css"/>
 </head>
 <body>
-    <div class="container-steps">
-        <!-- Step 1 -->
-        <div class="step-box odd">
-          <div class="step-ic-tx">
-            <img src="/public/images/idea.png" alt="Contact & Share Your Idea" />
-            <h1>Contact &amp; Share Your Idea</h1>
-          </div>
-          <p>Send me a message with details about your website pages, sections, and features needed.</p>
-        </div>
-      
-        <!-- Step 2 -->
-        <div class="step-box even">
-          <div class="step-ic-tx">
-            <img src="/public/images/agreement.png" alt="Discussion & Price Agreement" />
-            <h1>Discussion &amp; Price Agreement</h1>
-          </div>
-          <p>We discuss details via text or call. I research your needs and provide a price. Only a 10% deposit is required.</p>
-        </div>
-      
-        <!-- Step 3 -->
-        <div class="step-box odd">
-          <div class="step-ic-tx">
-            <img src="/public/images/coding.png" alt="Content & Development" />
-            <h1>Send Content &amp; Development</h1>
-          </div>
-          <p>You provide materials (text, fonts, images, logos) and I start building your website.</p>
-        </div>
-      
-        <!-- Step 4 -->
-        <div class="step-box even">
-          <div class="step-ic-tx">
-            <img src="/public/images/code-review.png" alt="Review & Approval" />
-            <h1>Review &amp; Approval</h1>
-          </div>
-          <p>You review the website and suggest any changes if needed. Once you’re happy with everything, we move to payment.</p>
-        </div>
-      
-        <!-- Step 5 -->
-        <div class="step-box odd">
-          <div class="step-ic-tx">
-            <img src="/public/images/payment.png" alt="Payment & Launch" />
-            <h1>Payment &amp; Launch</h1>
-          </div>
-          <p>After approval, you send the remaining payment before launch.</p>
-        </div>
-      
-        <!-- Step 6 -->
-        <div class="step-box even">
-          <div class="step-ic-tx">
-            <img src="/public/images/start.png" alt="Hosting & Setup" />
-            <h1>Hosting &amp; Setup</h1>
-          </div>
-          <p>I set up hosting, connect your domain, and apply basic SEO to get your website live.</p>
-        </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="icon-wrapper">
+        <img src="/public/images/responsive.png" alt="Custom Design & Mobile Ready">
       </div>
-      
+      <div class="card-content">
+        <h2>Custom Design</h2>
+        <p>A simple, clean design tailored to your business needs, working smoothly on phones, tablets, and computers.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon-wrapper">
+        <img src="/public/images/pricing.png" alt="Affordable Pricing">
+      </div>
+      <div class="card-content">
+        <h2>Affordable Pricing</h2>
+        <p>Prices start at £200, clear and fair, with no hidden fees.</p>
+      </div>
+    </div>
+    <!-- repeat more .card as needed -->
+  </div>
+
 </body>
 </html>
-
