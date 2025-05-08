@@ -214,11 +214,12 @@ position:absolute;
   background-clip: text;
   text-fill-color: transparent;
   position: relative;
-  font-weight: 700;
-  padding: 0 2px;
+  font-weight: 600;
+  padding: 0 1px;
   display: inline;
-  letter-spacing: 0.5px;
-  text-shadow: 0px 0px 25px rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.3px;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+  font-size: 0.95em;
 }
 
 .about-container {
@@ -1934,7 +1935,7 @@ footer {
 
   /* Testimonials Mobile Styles */
   .testimonials {
-    padding: 40px 0;
+    padding: 20px 0;
     position: relative;
     overflow: hidden;
   }
@@ -1946,61 +1947,42 @@ footer {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     gap: 0;
-    padding: 0 20px;
-  }
-
-  .testimonials-grid::-webkit-scrollbar {
-    display: none;
+    padding: 0 10px;
+    margin: 15px 0;
   }
 
   .testimonial-card {
-    flex: 0 0 100%;
+    flex: 0 0 110%;
     width: 100%;
     margin-right: 15px;
     scroll-snap-align: center;
     min-height: auto;
-    padding: 25px;
+    padding: 20px;
     transform: none !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: pan-x;
   }
 
-  .testimonial-text {
-    font-size: 0.95rem;
-    line-height: 1.6;
+  /* Completely disable transform and transitions on mobile */
+  .testimonial-card,
+  .testimonial-card:hover,
+  .testimonial-card:active,
+  .testimonial-card.aos-animate,
+  .testimonial-card.aos-animate:hover,
+  [data-aos].testimonial-card.aos-animate,
+  [data-aos].testimonial-card.aos-animate:hover {
+    transform: none !important;
+    transition: none !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+    background-color: #1a1a1a !important;
+  }
+
+  .testimonials-header {
+    text-align: center;
     margin-bottom: 20px;
-  }
-
-  .author-info h4 {
-    font-size: 1rem;
-  }
-
-  .author-info span {
-    font-size: 0.8rem;
-  }
-
-  /* Pagination dots */
-  .testimonials-dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    margin-top: 20px;
-    padding: 10px 0;
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
-  }
-
-  .dot.active {
-    background: #fff;
-    transform: scale(1.2);
-  }
-
-
+}
 
   /* Mobile Footer Styles */
   footer {
@@ -2240,7 +2222,7 @@ footer {
     padding: 0 1px;
     display: inline;
     letter-spacing: 0.3px;
-    text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
     font-size: 0.95em;
   }
 
@@ -2310,7 +2292,7 @@ footer {
 
   /* Testimonials */
   .testimonials {
-    padding: 40px 0;
+    padding: 40px0;
     overflow: hidden;
   }
 
@@ -2355,44 +2337,6 @@ footer {
     flex-shrink: 0;
   }
   
-  .step-ic-tx h1 {
-    font-size: 1.1rem;
-    color: #fff;
-    margin: 0;
-  }
-
-  /* step-box adjustments */
-  .step-box {
-    position: relative;
-    z-index: 2;
-    width: 74%;
-    height: auto;
-    min-height: auto;
-    background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 12px;
-    padding: 25px;
-    text-align: left;
-    overflow: visible;
-    margin-bottom: 10px;
-    overflow-y: hidden;
-  }
-
-  .step-ic-tx {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    margin-bottom: 12px;
-    overflow: visible;
-  }
-
-  .step-ic-tx img {
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-    flex-shrink: 0;
-  }
-
   .step-ic-tx h1 {
     font-size: 1rem;
     color: #fff;

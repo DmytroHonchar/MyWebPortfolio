@@ -58,24 +58,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Testimonial card hover effect with AOS compatibility
+  // Testimonial card hover effect with better mobile handling
   const testimonialCards = document.querySelectorAll('.testimonial-card');
+  
+  // Store original styles for each card
   testimonialCards.forEach(card => {
-    // Store original transform for reset
     const originalTransform = window.getComputedStyle(card).transform;
     
+    // Only add event listeners - they will be controlled by CSS media queries
     card.addEventListener('mouseenter', () => {
-      // Apply hover effect regardless of AOS state
-      card.style.transform = 'translateY(-8px)';
-      card.style.boxShadow = '0 8px 15px rgba(0, 0, 0, 0.3)';
-      card.style.backgroundColor = '#222';
+      if (window.innerWidth > 768) {
+        card.style.transform = 'translateY(-8px)';
+        card.style.boxShadow = '0 8px 15px rgba(0, 0, 0, 0.3)';
+        card.style.backgroundColor = '#222';
+      }
     });
     
     card.addEventListener('mouseleave', () => {
-      // Reset to original state
-      card.style.transform = originalTransform;
-      card.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
-      card.style.backgroundColor = '#1a1a1a';
+      if (window.innerWidth > 768) {
+        card.style.transform = originalTransform;
+        card.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
+        card.style.backgroundColor = '#1a1a1a';
+      }
     });
   });
 
@@ -229,14 +233,6 @@ document.addEventListener('DOMContentLoaded', function() {
         currentSlide = index;
         updateTestimonialSlide();
       });
-    });
-
-    // Handle scroll end for snapping
-    testimonialsGrid.addEventListener('scrollend', () => {
-      const scrollPosition = testimonialsGrid.scrollLeft;
-      const slideWidth = testimonialsGrid.offsetWidth;
-      currentSlide = Math.round(scrollPosition / slideWidth);
-      updateTestimonialSlide();
     });
   }
 });
