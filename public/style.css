@@ -2504,4 +2504,9 @@ footer {
   .services-grid .service-card:nth-child(5) {
     margin: 0 auto;
   }
+
+  .profile-image{
+    margin-top: 10px;
+  }
 }
+
