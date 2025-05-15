@@ -2370,6 +2370,25 @@ footer {
     padding: 20px 0 30px;
     overflow: visible;
   }
+
+
+  .testimonials-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+.testimonials-dots .dot {
+  width: 8px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+.testimonials-dots .dot.active {
+  background-color: #ffffff;
+}
+
 }
 
 /* ====================== END MOBILE STYLES ====================== */
