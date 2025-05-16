@@ -1,4 +1,3 @@
-// server/server.js
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
@@ -23,7 +22,7 @@ app.use(cors());
 // Initialize Helmet but turn off its built-in CSP
 app.use(
   helmet({
-    contentSecurityPolicy: false
+    contentSecurityPolicy: false,
   })
 );
 
@@ -35,31 +34,24 @@ app.use(
       scriptSrc: [
         "'self'",
         'https://maps.googleapis.com',
-        'https://cdnjs.cloudflare.com'
+        'https://cdnjs.cloudflare.com',
       ],
       styleSrc: [
         "'self'",
         "'unsafe-inline'",
         'https://fonts.googleapis.com',
         'https://maps.googleapis.com',
-        'https://cdnjs.cloudflare.com'
+        'https://cdnjs.cloudflare.com',
       ],
-      imgSrc: [
-        "'self'",
-        'https://maps.gstatic.com',
-        'https://maps.googleapis.com'
-      ],
+      imgSrc: ["'self'", 'https://maps.gstatic.com', 'https://maps.googleapis.com'],
       frameSrc: [
         "'self'",
         'https://www.google.com',
         'https://maps.googleapis.com',
-        'https://www.google.com/maps/embed/'
+        'https://www.google.com/maps/embed/',
       ],
-      fontSrc: [
-        "'self'",
-        'https://fonts.gstatic.com'
-      ]
-    }
+      fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+    },
   })
 );
 
@@ -92,23 +84,41 @@ app.get('/contact', (req, res) => {
 
 // Handle form submission with rate limiting
 app.post('/contact', contactFormLimiter, async (req, res) => {
-  let { name, email, businessType, serviceType,
-        projectSize, timeline, budget,
-        features, requirements, phone } = req.body;
+  // Pull in features[], defaulting to an empty array if none sent
+  let {
+    name,
+    email,
+    businessType,
+    serviceType,
+    projectSize,
+    timeline,
+    budget,
+    features = [],
+    requirements,
+    phone, // honeypot
+  } = req.body;
 
-  // Honeypot
+  // Honeypot: reject bots
   if (phone) {
     console.log('Bot detected via honeypot.');
     return res.status(400).send('Bot detected. Submission rejected.');
   }
 
-  // Required fields
-  if (!name || !email || !businessType || !serviceType ||
-      !projectSize || !timeline || !budget || !requirements) {
+  // All required fields
+  if (
+    !name ||
+    !email ||
+    !businessType ||
+    !serviceType ||
+    !projectSize ||
+    !timeline ||
+    !budget ||
+    !requirements
+  ) {
     return res.status(400).send('All required fields must be filled');
   }
 
-  // Sanitize
+  // Sanitize inputs
   name = validator.escape(name.trim());
   email = validator.normalizeEmail(email.trim());
   businessType = validator.escape(businessType.trim());
@@ -118,12 +128,17 @@ app.post('/contact', contactFormLimiter, async (req, res) => {
   budget = validator.escape(budget.trim());
   requirements = requirements.trim();
 
-  const featuresString = Array.isArray(features) ? features.join(', ') : '';
-
+  // Validate email format
   if (!validator.isEmail(email)) {
     return res.status(400).send('Invalid email address');
   }
 
+  // Escape each feature and join into a comma-separated string
+  const featuresString = features
+    .map((f) => validator.escape(f))
+    .join(', ');
+
+  // Prepare mail
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: process.env.EMAIL_USER,
@@ -145,31 +160,31 @@ Requirements:
 ${requirements}
     `,
     html: `
-<h2>New project inquiry:</h2>
-<p><strong>Name:</strong> ${name}</p>
-<p><strong>Email:</strong> ${email}</p>
-<p><strong>Business Type:</strong> ${businessType}</p>
-<p><strong>Service Needed:</strong> ${serviceType}</p>
-<p><strong>Project Size:</strong> ${projectSize}</p>
-<p><strong>Timeline:</strong> ${timeline}</p>
-<p><strong>Budget Range:</strong> ${budget}</p>
-<p><strong>Selected Features:</strong> ${featuresString}</p>
-<h3>Requirements:</h3>
-<p>${requirements.replace(/\n/g, '<br>')}</p>
-    `
+      <h2>New project inquiry:</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Business Type:</strong> ${businessType}</p>
+      <p><strong>Service Needed:</strong> ${serviceType}</p>
+      <p><strong>Project Size:</strong> ${projectSize}</p>
+      <p><strong>Timeline:</strong> ${timeline}</p>
+      <p><strong>Budget Range:</strong> ${budget}</p>
+      <p><strong>Selected Features:</strong> ${featuresString || 'None'}</p>
+      <h3>Requirements:</h3>
+      <p>${requirements.replace(/\n/g, '<br>')}</p>
+    `,
   };
 
   try {
     await transporter.sendMail(mailOptions);
     res.status(200).json({
       success: true,
-      message: 'Thank you for your inquiry! I will get back to you soon.'
+      message: 'Thank you for your inquiry! I will get back to you soon.',
     });
   } catch (err) {
     console.error('Error sending email:', err);
     res.status(500).json({
       success: false,
-      message: 'Failed to send message. Please try again later.'
+      message: 'Failed to send message. Please try again later.',
     });
   }
 });

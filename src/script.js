@@ -95,12 +95,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
       try {
         const formData = new FormData(this);
+        // Get all selected features
+        const features = Array.from(formData.getAll('features[]'));
+        
+        // Create the data object
+        const data = Object.fromEntries(formData);
+        data.features = features; // Override the features with array
+
         const response = await fetch('/contact', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(Object.fromEntries(formData)),
+          body: JSON.stringify(data),
         });
 
         const result = await response.json();
