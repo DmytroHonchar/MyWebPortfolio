@@ -2141,14 +2141,49 @@ footer {
     touch-action: none;
   }
 
-  .checkbox-custom {
+  checkbox-custom {
+    /* sizing & positioning for mobile */
     min-width: 20px;
     width: 20px;
     height: 20px;
     flex-shrink: 0;
     position: static;
+
+    /* restore desktop box styling on mobile */
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    transition: all 0.3s ease;
   }
 
+  /* hover state */
+  .feature-checkbox:hover .checkbox-custom {
+    border-color: #6C7B8B;
+  }
+
+  /* checked state */
+  .feature-checkbox input:checked ~ .checkbox-custom {
+    background: #6C7B8B;
+    border-color: #6C7B8B;
+  }
+
+  /* checkmark */
+  .checkbox-custom:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .feature-checkbox input:checked ~ .checkbox-custom:after {
+    display: block;
+  }
   /* Touch states */
   .form-group input:active,
   .form-group select:active,
