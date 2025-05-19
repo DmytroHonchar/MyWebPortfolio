@@ -10,6 +10,7 @@ const rateLimit = require('express-rate-limit');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Trust first proxy (if behind one)
 app.set('trust proxy', 1);
 
 // Body parsers
@@ -19,14 +20,12 @@ app.use(express.json());
 // Enable CORS if needed
 app.use(cors());
 
-// Initialize Helmet but turn off its built-in CSP
+// Helmet for security, custom CSP
 app.use(
   helmet({
     contentSecurityPolicy: false,
   })
 );
-
-// Now apply your custom CSP before serving any static assets
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -68,23 +67,22 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Rate limiter for contact form
+// Rate limiter for contact form submissions
 const contactFormLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5,
+  max: 5, // limit each IP to 5 requests per windowMs
   message: 'Too many submissions from this IP, please try again after 15 minutes.',
   standardHeaders: true,
   legacyHeaders: false,
 });
 
-// Contact form page (no rate limit)
+// Route: serve contact form
 app.get('/contact', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'contact.html'));
 });
 
-// Handle form submission with rate limiting
+// Route: handle contact form submissions
 app.post('/contact', contactFormLimiter, async (req, res) => {
-  // Pull in features[], defaulting to an empty array if none sent
   let {
     name,
     email,
@@ -95,16 +93,16 @@ app.post('/contact', contactFormLimiter, async (req, res) => {
     budget,
     features = [],
     requirements,
-    phone, // honeypot
+    phone, // honeypot field
   } = req.body;
 
-  // Honeypot: reject bots
+  // Honeypot check
   if (phone) {
     console.log('Bot detected via honeypot.');
     return res.status(400).send('Bot detected. Submission rejected.');
   }
 
-  // All required fields
+  // Validate required fields
   if (
     !name ||
     !email ||
@@ -128,48 +126,102 @@ app.post('/contact', contactFormLimiter, async (req, res) => {
   budget = validator.escape(budget.trim());
   requirements = requirements.trim();
 
+  // Format options for better readability
+  const optionsMap = {
+    // Project Size options
+    projectSize: {
+      'landing': 'Landing Page (1 page)',
+      'small': 'Small (2-3 pages)',
+      'medium': 'Medium (4-6 pages)',
+      'large': 'Large (7+ pages)',
+      'custom': 'Custom (Special Requirements)'
+    },
+    // Business Type options
+    businessType: {
+      'restaurant': 'Restaurant/Cafe',
+      'beauty': 'Beauty/Barber Shop',
+      'store': 'Instagram/Online Store',
+      'local': 'Local Service Business',
+      'fitness': 'Gym/Fitness',
+      'other': 'Other Small Business'
+    },
+    // Service Type options
+    serviceType: {
+      'new-website': 'New Website',
+      'redesign': 'Website Redesign',
+      'fixes': 'Website Fixes/Updates',
+      'features': 'Add New Features',
+      'other': 'Other (Please Specify in Message)'
+    },
+    // Timeline options
+    timeline: {
+      'asap': 'ASAP (1-2 weeks)',
+      'normal': 'Normal (2-4 weeks)',
+      'flexible': 'Flexible (4+ weeks)'
+    },
+    // Budget Range options
+    budget: {
+      '200-500': '£200 - £500',
+      '500-1000': '£500 - £1,000',
+      '1000-2000': '£1,000 - £2,000',
+      'discuss': 'Let\'s Discuss'
+    }
+  };
+  
+  // Format all form fields
+  const formattedValues = {
+    projectSize: optionsMap.projectSize[projectSize.toLowerCase()] || projectSize,
+    businessType: optionsMap.businessType[businessType.toLowerCase()] || businessType,
+    serviceType: optionsMap.serviceType[serviceType.toLowerCase()] || serviceType,
+    timeline: optionsMap.timeline[timeline.toLowerCase()] || timeline,
+    budget: optionsMap.budget[budget.toLowerCase()] || budget
+  };
+
   // Validate email format
   if (!validator.isEmail(email)) {
     return res.status(400).send('Invalid email address');
   }
 
-  // Escape each feature and join into a comma-separated string
-  const featuresString = features
-    .map((f) => validator.escape(f))
-    .join(', ');
+  // Sanitize each feature (already human-readable labels)
+  const sanitizedFeatures = features.map(f => validator.escape(f.trim()));
+  // Join for plain-text
+  const featuresString = sanitizedFeatures.join('\n');
 
-  // Prepare mail
+  // Prepare mail options
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: process.env.EMAIL_USER,
     replyTo: email,
-    subject: `New Website Project Inquiry - ${businessType}`,
-    text: `
-New project inquiry:
-
+    subject: `New Website Project Inquiry - ${formattedValues.businessType}`,    text: `
+New Project Inquiry
 Name: ${name}
 Email: ${email}
-Business Type: ${businessType}
-Service Needed: ${serviceType}
-Project Size: ${projectSize}
-Timeline: ${timeline}
-Budget Range: ${budget}
-Selected Features: ${featuresString}
+Type of Business: ${formattedValues.businessType}
+Service Needed: ${formattedValues.serviceType}
+Project Size: ${formattedValues.projectSize}
+Timeline: ${formattedValues.timeline}
+Budget Range: ${formattedValues.budget}
 
-Requirements:
+Key Features Needed:
+${featuresString}
+
+Additional Requirements:
 ${requirements}
     `,
     html: `
-      <h2>New project inquiry:</h2>
+      <h2>New Project Inquiry</h2>
       <p><strong>Name:</strong> ${name}</p>
       <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Business Type:</strong> ${businessType}</p>
-      <p><strong>Service Needed:</strong> ${serviceType}</p>
-      <p><strong>Project Size:</strong> ${projectSize}</p>
-      <p><strong>Timeline:</strong> ${timeline}</p>
-      <p><strong>Budget Range:</strong> ${budget}</p>
-      <p><strong>Selected Features:</strong> ${featuresString || 'None'}</p>
-      <h3>Requirements:</h3>
+      <p><strong>Type of Business:</strong> ${formattedValues.businessType}</p>
+      <p><strong>Service Needed:</strong> ${formattedValues.serviceType}</p>
+      <p><strong>Project Size:</strong> ${formattedValues.projectSize}</p>
+      <p><strong>Timeline:</strong> ${formattedValues.timeline}</p>
+      <p><strong>Budget Range:</strong> ${formattedValues.budget}</p>
+      <h3>Key Features Needed:</h3>
+      <ul>
+        ${sanitizedFeatures.map(f => `<li>${f}</li>`).join('')}
+      </ul>
+      <h3>Additional Requirements:</h3>
       <p>${requirements.replace(/\n/g, '<br>')}</p>
     `,
   };
@@ -189,11 +241,12 @@ ${requirements}
   }
 });
 
-// Fallback to index.html
+// Fallback to index.html for any other routes
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
+// Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

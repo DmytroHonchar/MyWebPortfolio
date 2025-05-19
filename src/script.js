@@ -95,12 +95,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
       try {
         const formData = new FormData(this);
-        // Get all selected features
-        const features = Array.from(formData.getAll('features[]'));
-        
-        // Create the data object
+
+        // Get the human-readable labels of each checked feature
+        const features = Array.from(
+          this.querySelectorAll('input[name="features[]"]:checked')
+        ).map(input => {
+          return input
+            .closest('.feature-checkbox')
+            .querySelector('.feature-label')
+            .textContent.trim();
+        });
+
+        // Build the payload object
         const data = Object.fromEntries(formData);
-        data.features = features; // Override the features with array
+        data.features = features; // override with the array of labels
 
         const response = await fetch('/contact', {
           method: 'POST',
