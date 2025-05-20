@@ -60,12 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Testimonial card hover effect with better mobile handling
   const testimonialCards = document.querySelectorAll('.testimonial-card');
-  
-  // Store original styles for each card
+
   testimonialCards.forEach(card => {
     const originalTransform = window.getComputedStyle(card).transform;
-    
-    // Only add event listeners - they will be controlled by CSS media queries
     card.addEventListener('mouseenter', () => {
       if (window.innerWidth > 768) {
         card.style.transform = 'translateY(-8px)';
@@ -73,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
         card.style.backgroundColor = '#222';
       }
     });
-    
     card.addEventListener('mouseleave', () => {
       if (window.innerWidth > 768) {
         card.style.transform = originalTransform;
@@ -83,60 +79,90 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Contact form submission handler
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      const submitButton = this.querySelector('button[type="submit"]');
-      submitButton.disabled = true;
-      submitButton.textContent = 'Sending...';
-
-      try {
-        const formData = new FormData(this);
-
-        // Get the human-readable labels of each checked feature
-        const features = Array.from(
-          this.querySelectorAll('input[name="features[]"]:checked')
-        ).map(input => {
-          return input
-            .closest('.feature-checkbox')
-            .querySelector('.feature-label')
-            .textContent.trim();
-        });
-
-        // Build the payload object
-        const data = Object.fromEntries(formData);
-        data.features = features; // override with the array of labels
-
-        const response = await fetch('/contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        });
-
-        const result = await response.json();
-        
-        if (result.success) {
-          alert(result.message);
-          this.reset();
-        } else {
-          throw new Error(result.message);
-        }
-      } catch (error) {
-        alert(error.message || 'Failed to send message. Please try again later.');
-      } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = 'Send Message';
-      }
-    });
+// --- Contact form submission handler (updated) ---
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  // Ensure there's a message box
+  let msgBox = document.getElementById('formMessage');
+  if (!msgBox) {
+    msgBox = document.createElement('div');
+    msgBox.id = 'formMessage';
+    msgBox.className = 'form-message';
+    contactForm.appendChild(msgBox);
   }
 
+  // Submission handler (with improved error parsing + auto-hide)
+  contactForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const submitButton = this.querySelector('button[type="submit"]');
+    // Reset & hide message box
+    msgBox.className = 'form-message';
+    msgBox.textContent = '';
+
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+
+    try {
+      const formData = new FormData(this);
+      const features = Array.from(
+        this.querySelectorAll('input[name="features[]"]:checked')
+      ).map(input =>
+        input.closest('.feature-checkbox')
+             .querySelector('.feature-label')
+             .textContent.trim()
+      );
+
+      const data = Object.fromEntries(formData);
+      data.features = features;
+
+      const response = await fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      // If non-2xx, parse JSON error body if possible, otherwise text
+      if (!response.ok) {
+        const ct = response.headers.get('content-type') || '';
+        if (ct.includes('application/json')) {
+          const errJson = await response.json();
+          throw new Error(errJson.message || 'Failed to send message.');
+        } else {
+          const text = await response.text();
+          throw new Error(text || 'Failed to send message.');
+        }
+      }
+
+      // 2xx → parse JSON normally
+      const result = await response.json();
+
+      if (result.success) {
+        msgBox.classList.add('form-message--success');
+        msgBox.textContent = result.message;
+        this.reset();
+      } else {
+        throw new Error(result.message || 'Something went wrong.');
+      }
+
+    } catch (err) {
+      msgBox.classList.add('form-message--error');
+      msgBox.textContent = err.message;
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Send Message';
+
+      // Auto-hide both success & error after 5s
+      setTimeout(() => {
+        msgBox.className = 'form-message';
+        msgBox.textContent = '';
+      }, 5000);
+    }
+  });
+}
+
+
   // Email and Phone Protection
-  // Handle email protection
   const emailLinks = document.querySelectorAll('.email-protect');
   emailLinks.forEach(link => {
     link.addEventListener('click', function(e) {
@@ -147,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Handle phone protection
   const phoneLinks = document.querySelectorAll('.phone-protect');
   phoneLinks.forEach(link => {
     link.addEventListener('click', function(e) {
@@ -158,44 +183,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Bot Protection
-  // Set data-text attribute for no-bot elements
+  // Bot Protection: data-text attr for no-bot elements
   document.querySelectorAll('.no-bot').forEach(function(element) {
     element.setAttribute('data-text', element.textContent);
   });
 
   // Bot Protection - Obfuscate email and phone after page loads
   setTimeout(function() {
-    // Find all email and phone links
-    const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
-    const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-    
     // Obfuscate email addresses
-    emailLinks.forEach(function(link) {
+    document.querySelectorAll('a[href^="mailto:"]').forEach(function(link) {
       const email = link.getAttribute('href').replace('mailto:', '');
       const parts = email.split('@');
       if (parts.length === 2) {
-        const username = parts[0];
-        const domain = parts[1];
-        
-        // Create a slightly obfuscated version for bots
-        const obfuscatedUsername = username.split('').reverse().join('');
-        const obfuscatedDomain = domain.split('').reverse().join('');
-        
-        // Add data attributes with obfuscated values
-        link.setAttribute('data-username', obfuscatedUsername);
-        link.setAttribute('data-domain', obfuscatedDomain);
+        const username = parts[0].split('').reverse().join('');
+        const domain = parts[1].split('').reverse().join('');
+        link.setAttribute('data-username', username);
+        link.setAttribute('data-domain', domain);
       }
     });
-    
+
     // Obfuscate phone numbers
-    phoneLinks.forEach(function(link) {
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(link) {
       const phone = link.getAttribute('href').replace('tel:', '');
-      
-      // Create a slightly obfuscated version for bots
       const obfuscatedPhone = phone.split('').reverse().join('');
-      
-      // Add data attribute with obfuscated value
       link.setAttribute('data-phone', obfuscatedPhone);
     });
   }, 1000);
@@ -217,12 +227,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const touchEndX = e.changedTouches[0].clientX;
       const diff = touchStartX - touchEndX;
 
-      if (Math.abs(diff) > 50) { // Minimum swipe distance
+      if (Math.abs(diff) > 50) {
         if (diff > 0 && currentSlide < dots.length - 1) {
-          // Swipe left
           currentSlide++;
         } else if (diff < 0 && currentSlide > 0) {
-          // Swipe right
           currentSlide--;
         }
         updateTestimonialSlide();
@@ -235,8 +243,6 @@ document.addEventListener('DOMContentLoaded', function() {
         left: currentSlide * testimonialsGrid.offsetWidth,
         behavior: 'smooth'
       });
-      
-      // Update dots
       dots.forEach((dot, index) => {
         dot.classList.toggle('active', index === currentSlide);
       });

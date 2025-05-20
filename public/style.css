@@ -1098,6 +1098,8 @@ position:absolute;
   transform: translateY(-2px);
 }
 
+
+
 footer {
   background: #111;
   padding: 60px 0 20px;
@@ -1520,6 +1522,57 @@ footer {
 .contact-info a:hover .no-bot::before {
   color: #fff;
 }
+
+
+/* Inline form messages */
+.form-message {
+  /* hidden by default */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: #1a1a1a;
+  color: #fff;
+  border-left: 4px solid transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+/* show it */
+.form-message--success,
+.form-message--error {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Success state */
+.form-message--success {
+  border-left-color: #6C7B8B;
+  background: #242424;
+}
+.form-message--success::before {
+  content: '✔';
+  color: #6C7B8B;
+  font-size: 1.2em;
+}
+
+/* Error state */
+.form-message--error {
+  border-left-color: #DC2626;
+  background: #2a1a1a;
+}
+.form-message--error::before {
+  content: '✖';
+  color: #DC2626;
+  font-size: 1.2em;
+}
+
 
 /* Mobile Styles */
 @media screen and (max-width: 768px) {
@@ -2424,7 +2477,26 @@ footer {
   background-color: #ffffff;
 }
 
+
+ #formMessage.form-message {
+    /* full width with no side gaps */
+    width: 100%;
+    margin-top: 16px;
+    padding: 12px 16px;
+    font-size: 0.90rem;
+    gap: 8px;
+    border-radius: 8px;
+    /* thinner accent stripe */
+    border-left-width: 3px;
+  }
+  /* adjust icons size */
+  #formMessage.form-message::before {
+    font-size: 1em;
+  }
+
 }
+
+
 
 /* ====================== END MOBILE STYLES ====================== */
 
